@@ -19,6 +19,8 @@
 @media(max-width:360px){.sidebar{padding:17px 12px 0}.brand{font-size:25px}.sidebar nav{gap:0;flex-wrap:wrap}.nav-item{flex:1 1 45%;padding:10px 3px}.topbar{padding:0 12px;gap:10px;align-items:center}.topbar-right{max-width:95px}.demo-banner{padding:12px}.demo-banner .text-button{white-space:normal}main{padding:25px 12px 0}h1{font-size:clamp(29px,10.6vw,38px);letter-spacing:-1.3px}.heading-controls{display:block}.heading-controls select{margin-top:8px}#asof-label{display:block;margin-top:5px}.summary-stats{gap:14px}.stat-value{font-size:20px}.section-heading{flex-wrap:wrap}.forecast-panel{padding:17px 12px}.entry-row{grid-template-columns:27px minmax(0,1fr)}.entry-amount{grid-column:2}.entry-date{grid-row:auto;margin-top:-5px}.comparison-values{flex-wrap:wrap;gap:15px}.comparison-values strong{font-size:22px}.scenario-controls{padding:19px 14px}.scenario-controls output{float:none;display:block;margin-top:4px}.filter{padding:8px 10px}.toast{font-size:12px;padding:12px 16px;width:90vw}.button{white-space:normal}.chart-legend{font-size:9px}}
 
 .setup-guide{display:flex;align-items:center;gap:25px;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 0 25px;margin-bottom:25px}.setup-guide h2{font-size:25px}.setup-guide p{font-size:12px;color:var(--muted);max-width:480px;margin-top:10px}.setup-guide .eyebrow{margin-bottom:8px}.setup-links{display:grid;min-width:160px}.repeat-preview{font-size:12px;background:var(--surface);padding:12px;margin:0 0 16px;line-height:1.8;overflow-wrap:anywhere}@media(max-width:700px){.setup-guide{display:block}.setup-links{margin-top:14px}.entry-actions button{min-height:44px}.chart{overflow-x:auto}.chart svg{min-width:420px}.panel-heading h2{overflow-wrap:anywhere}}
+
+.scenario-result{grid-column:2;grid-row:1}.scenario-controls{grid-column:1;grid-row:1;min-width:0}.scenario-scope{font-size:12px;font-weight:650;margin-bottom:13px;overflow-wrap:anywhere}#scenario-income{margin-top:7px;text-overflow:ellipsis}#scenario-income-help{margin-top:8px}#adjust-scenario{display:none}#scenario-impact{overflow-wrap:anywhere}@media(max-width:1000px){.scenario-result,.scenario-controls{grid-column:1;grid-row:auto}#adjust-scenario{display:inline-flex;margin:3px 0 8px}}
 </style>
 </head>
 <body>
@@ -33,7 +35,7 @@
 <button class="nav-item" data-nav="scenario"><span aria-hidden="true">↗</span> What if?</button>
 <button class="nav-item" data-nav="settings"><span aria-hidden="true">⚙</span> Your plan</button>
 </nav>
-<div class="sidebar-note"><span class="small-cap">BUILT FOR REAL LIFE</span><p>Income can be uncertain.<br>Your next step doesn’t have to be.</p><div class="local-lock"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="9" width="12" height="8" rx="2"/><path d="M6 9V6a4 4 0 0 1 8 0v3"/></svg>Stored in this browser</div><small>Demo v0.2 · no bank connection</small></div>
+<div class="sidebar-note"><span class="small-cap">BUILT FOR REAL LIFE</span><p>Income can be uncertain.<br>Your next step doesn’t have to be.</p><div class="local-lock"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="9" width="12" height="8" rx="2"/><path d="M6 9V6a4 4 0 0 1 8 0v3"/></svg>Stored in this browser</div><small>Demo v0.3 · no bank connection</small></div>
 </aside>
 <div class="workspace">
 <header class="topbar"><span id="today-label"></span><span class="topbar-right"><span class="privacy-dot"></span> Your numbers stay here</span></header>
@@ -72,10 +74,11 @@
 <div id="ledger-list"></div><p class="fine-print">Record received / paid only when the transaction has happened. These actions update your saved balance once. If you already updated your balance manually, do not record the same transaction again.</p>
 </section>
 <section id="view-scenario" class="view" hidden>
-<div class="scenario-layout"><form id="scenario-form" class="scenario-controls"><div class="eyebrow">CHANGE THE ASSUMPTIONS</div><h2>Give your plan a stress test.</h2><label for="delay">Expected income arrives later <output id="delay-value" for="delay">7 days</output></label><input id="delay" type="range" min="0" max="60" value="7" step="1"><div class="range-ends"><span>On time</span><span>60 days late</span></div>
-<label for="percent">Expected income received <output id="percent-value" for="percent">100%</output></label><input id="percent" type="range" min="0" max="100" value="100" step="5"><div class="range-ends"><span>Nothing arrives</span><span>Full amount</span></div>
-<p class="form-help">Only income labelled “Expected” changes. Confirmed income stays fixed. This is a possibility to explore, not a prediction.</p><hr><h3>Considering a purchase?</h3><label for="purchase">One-off spend <span class="currency-label"></span><input id="purchase" type="number" min="0" max="1000000000" step="0.01" value="0" inputmode="decimal"></label><label for="purchase-date">Purchase date<input id="purchase-date" type="date" required></label><p class="form-help">Preview only. This does not add a bill or change your saved balance.</p><button class="button primary" type="submit">Update comparison</button><button id="reset-scenario" class="text-button" type="button">Reset assumptions</button><p id="scenario-error" role="alert" class="error"></p></form>
-<div class="scenario-result"><div id="scenario-summary"></div><div id="scenario-chart" class="chart"></div><div class="chart-legend"><span><i class="legend-line"></i>Expected plan</span><span><i class="legend-line scenario-line"></i>Your scenario</span></div><div id="scenario-next" class="next-step"></div><details class="forecast-details"><summary>Compare day-by-day numbers</summary><div id="scenario-table" class="table-scroll"></div></details></div></div>
+<div id="scenario-selection-notice" class="warning" role="status" hidden></div>
+<div class="scenario-layout">
+<div class="scenario-result"><div id="scenario-summary" aria-live="polite" aria-atomic="true"></div><p id="scenario-impact" class="form-help"></p><button id="adjust-scenario" class="button secondary">Adjust this scenario</button><div id="scenario-chart" class="chart"></div><div class="chart-legend"><span><i class="legend-line"></i>Expected plan</span><span><i class="legend-line scenario-line"></i>Your scenario</span></div><div id="scenario-next" class="next-step"></div><details class="forecast-details"><summary>Compare day-by-day numbers</summary><div id="scenario-table" class="table-scroll"></div></details></div><form id="scenario-form" class="scenario-controls"><div class="eyebrow">CHANGE THE ASSUMPTIONS</div><h2>Give your plan a stress test.</h2><label for="scenario-income">Which payment might change?</label><select id="scenario-income" aria-describedby="scenario-income-help"><option value="">All expected payments</option></select><p id="scenario-income-help" class="form-help"></p><label for="delay">Arrives later <output id="delay-value" for="delay">7 days</output></label><input id="delay" type="range" min="0" max="60" value="7" step="1"><div class="range-ends"><span>On time</span><span>60 days late</span></div>
+<label for="percent">Amount received <output id="percent-value" for="percent">100%</output></label><input id="percent" type="range" min="0" max="100" value="100" step="5"><div class="range-ends"><span>Nothing arrives</span><span>Full amount</span></div>
+<p class="form-help">Received and overdue income cannot be adjusted here. Reschedule an overdue payment in Money in &amp; out first. This is a possibility, not a prediction.</p><hr><h3>Considering a purchase?</h3><label for="purchase">One-off spend <span class="currency-label"></span><input id="purchase" type="number" min="0" max="1000000000" step="0.01" value="0" inputmode="decimal"></label><label for="purchase-date">Purchase date<input id="purchase-date" type="date" required></label><p class="form-help">Preview only. This does not add a bill or change your saved balance.</p><button class="button primary" type="submit">Update comparison</button><button id="reset-scenario" class="text-button" type="button">Reset assumptions</button><p id="scenario-error" role="alert" class="error"></p></form></div>
 </section>
 <section id="view-settings" class="view" hidden>
 <div class="settings-layout"><form id="settings-form" class="settings-form"><div class="eyebrow">THE STARTING POINT</div><h2>Your money. Your assumptions.</h2><p>Use your available bank and cash balances. Don’t include unused credit or income that hasn’t arrived.</p><div class="form-grid">
@@ -83,7 +86,7 @@
 <label>Daily essentials allowance<input id="setting-daily" type="number" min="0" max="1000000000" step="0.01" required inputmode="decimal"></label><label>Buffer to keep aside<input id="setting-buffer" type="number" min="0" max="1000000000" step="0.01" required inputmode="decimal"></label></div><p class="form-help">Essentials are a daily estimate for food, transport and similar spending. Don’t also add the same costs as bills. The buffer is a target, not a separate deduction. Refresh your balance regularly; daily allowances do not automatically change it.</p><p class="form-help">Changing currency only relabels amounts, it does not convert them. One currency per plan.</p><button type="submit" class="button primary">Save & refresh balance</button><p id="settings-error" class="error" role="alert"></p></form>
 <aside class="data-panel"><div class="eyebrow">YOU’RE IN CONTROL</div><h2>A private place to plan.</h2><p>Your plan is saved in this browser on this device. No account, trackers, AI service or bank access.</p><p>On the public demo, GitHub serves the page and may log connection details such as your IP address. The app does not send your entered amounts to the host. Local and online plans stay separate; transfer them with a backup.</p><p>Browser storage is not an encrypted vault. Anyone using this browser profile may access it. Clearing browser data can erase your plan. Pages hosted under the same domain share browser storage; do not treat this demo as a secure financial vault.</p><button id="export-plan" class="button secondary">Download a backup</button><label class="button secondary file-button">Restore a backup<input id="import-plan" type="file" accept="application/json,.json"></label><p class="fine-print">Backups contain financial amounts in readable JSON. Store them privately.</p><hr><button id="load-demo" class="text-button">Load sample plan</button><button id="clear-plan" class="text-button danger">Delete saved data</button><p id="import-error" class="error" role="alert"></p></aside></div>
 </section>
-<footer><span>Cashstead · Demo v0.2</span><span>Planning estimates only. No financial advice or guaranteed outcomes.</span></footer>
+<footer><span>Cashstead · Demo v0.3</span><span>Planning estimates only. No financial advice or guaranteed outcomes.</span></footer>
 </main>
 </div>
 </div>
@@ -105,7 +108,7 @@
   var PLAN_KEYS = ['version', 'currency', 'balance', 'buffer', 'dailyEssentials', 'balanceUpdatedAt', 'incomes', 'bills'];
   var INCOME_KEYS = ['id', 'name', 'amount', 'date', 'confidence', 'status'];
   var BILL_KEYS = ['id', 'name', 'amount', 'date', 'status'];
-  var OPTION_KEYS = ['today', 'days', 'mode', 'delayDays', 'incomePercent', 'purchaseAmount', 'purchaseDate'];
+  var OPTION_KEYS = ['today', 'days', 'mode', 'delayDays', 'incomePercent', 'purchaseAmount', 'purchaseDate', 'incomeId'];
   var MODES = ['expected', 'cashOnly', 'scenario'];
 
   var DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -331,7 +334,48 @@
     if (o.purchaseAmount > 0 && o.purchaseDate === null) {
       throw new RangeError('forecast: options.purchaseDate is required when options.purchaseAmount is greater than 0');
     }
+
+    /* null (or omitted) targets every expected income; a string targets exactly one. */
+    o.incomeId = options.incomeId === undefined ? null : options.incomeId;
+    if (o.incomeId !== null) {
+      if (typeof o.incomeId !== 'string') {
+        throw new RangeError('forecast: options.incomeId must be a string or null (got ' + JSON.stringify(options.incomeId) + ')');
+      }
+      if (o.incomeId.replace(/^\s+|\s+$/g, '').length === 0) {
+        throw new RangeError('forecast: options.incomeId must not be blank (got ' + JSON.stringify(options.incomeId) + ')');
+      }
+      if (o.incomeId.length > MAX_STRING) {
+        throw new RangeError('forecast: options.incomeId must be at most ' + MAX_STRING + ' characters');
+      }
+    }
     return o;
+  }
+
+  /* Resolves options.incomeId against the plan. Rejects anything the scenario cannot move. */
+  function resolveIncomeTarget(plan, o, startDay, lastDay) {
+    if (o.incomeId === null) return null;
+    var target = null;
+    for (var i = 0; i < plan.incomes.length; i++) {
+      if (plan.incomes[i].id === o.incomeId) { target = plan.incomes[i]; break; }
+    }
+    var ref = 'forecast: options.incomeId ' + JSON.stringify(o.incomeId);
+    if (target === null) {
+      throw new RangeError(ref + ' does not match any income in the plan');
+    }
+    if (target.status !== 'planned') {
+      throw new RangeError(ref + ' refers to income already marked ' + target.status + '; only planned income can be adjusted');
+    }
+    if (target.confidence !== 'expected') {
+      throw new RangeError(ref + ' refers to ' + target.confidence + ' income; only expected income can be adjusted');
+    }
+    var day = toEpochDay(target.date);
+    if (day < startDay) {
+      throw new RangeError(ref + ' refers to overdue income dated ' + target.date + ', before today ' + o.today + '; reschedule it first');
+    }
+    if (day > lastDay) {
+      throw new RangeError(ref + ' refers to income dated ' + target.date + ', outside the forecast window ' + o.today + ' to ' + fromEpochDay(lastDay));
+    }
+    return target;
   }
 
   function forecast(plan, options) {
@@ -344,6 +388,8 @@
     if (lastDay > MAX_EPOCH_DAY) {
       throw new RangeError('forecast: a ' + o.days + ' day horizon from ' + o.today + ' runs past the supported maximum date ' + MAX_DATE);
     }
+
+    resolveIncomeTarget(plan, o, startDay, lastDay);
 
     var buckets = [];
     for (var i = 0; i < o.days; i++) buckets.push({ incomeCents: 0, billCents: 0, events: [] });
@@ -363,7 +409,7 @@
       if (o.mode === 'cashOnly') continue;
       var cents = toCents(inc.amount);
       var day = originalDay;
-      if (o.mode === 'scenario' && inc.confidence === 'expected') {
+      if (o.mode === 'scenario' && inc.confidence === 'expected' && (o.incomeId === null || inc.id === o.incomeId)) {
         day = originalDay + o.delayDays;
         cents = Math.round(cents * o.incomePercent / 100);
       }
@@ -591,7 +637,8 @@
   const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const KEY = 'cashstead.plan.v1';
   let demo = true, storageBlocked = false, corrupted = false, plan, active = 'overview', filter = 'all', days = 30, toastTimer;
-  let scenario = {delayDays:7, incomePercent:100, purchaseAmount:0, purchaseDate:F.today()};
+  let scenarioNotice = "";
+  let scenario = {incomeId:null, delayDays:7, incomePercent:100, purchaseAmount:0, purchaseDate:F.today()};
   const round = n => Math.round((n + Number.EPSILON) * 100) / 100;
   const uid = () => globalThis.crypto?.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2);
   const emptyPlan = () => ({version:1,currency:'INR',balance:0,buffer:0,dailyEssentials:0,balanceUpdatedAt:F.today(),incomes:[],bills:[]});
@@ -683,15 +730,42 @@
     $('ledger-list').innerHTML=entries.length?entries.map(e=>entryRow(e,true)).join(''):'<div class="empty"><h3>No entries here yet.</h3><p>Add income or a bill using the button above.</p></div>';
     document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.toggle('active',b.dataset.filter===filter);b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
   }
+  function adjustableIncomes(){return plan.incomes.filter(i=>i.status==='planned'&&i.confidence==='expected'&&i.date>=F.today()&&i.date<=F.addDays(F.today(),days-1)).sort((a,b)=>a.date.localeCompare(b.date)||a.name.localeCompare(b.name));}
+  function renderIncomeChoices(){
+    const incomes=adjustableIncomes();
+    if(scenario.incomeId!==null&&!incomes.some(i=>i.id===scenario.incomeId)){
+      scenario.incomeId=null;scenario.delayDays=0;scenario.incomePercent=100;
+      $('delay').value=0;$('percent').value=100;
+      scenarioNotice='The selected payment is no longer adjustable in this window. Its delay and reduction have been reset. Your purchase preview is unchanged.';
+    }
+    const select=$('scenario-income');
+    select.replaceChildren(new Option('All expected payments',''),...incomes.map(i=>new Option(`${i.name} · ${dateLabel(i.date)} · ${money(i.amount)}`,i.id)));
+    select.value=scenario.incomeId??'';select.disabled=!incomes.length;
+    $('delay').disabled=!incomes.length;$('percent').disabled=!incomes.length;
+    $('scenario-selection-notice').textContent=scenarioNotice;$('scenario-selection-notice').hidden=!scenarioNotice;
+    const selected=incomes.find(i=>i.id===scenario.incomeId);
+    $('scenario-income-help').textContent=!incomes.length?'No upcoming expected payments in this window. Add one in Money in & out, or preview a purchase below.':selected?'Only this payment changes. Other income keeps its entered date and amount.':'All upcoming income labelled “Expected” changes together. Confirmed income stays fixed.';
+    return {incomes,selected};
+  }
   function renderScenario(base=forecast('expected')) {
+    const {incomes,selected}=renderIncomeChoices();
     const result=forecast('scenario',scenario),warning=result.firstBelowBuffer!==null;
     $('delay-value').textContent=scenario.delayDays===0?'On time':`${scenario.delayDays} days`;
     $('percent-value').textContent=`${scenario.incomePercent}%`;
     const title=warning?`Your buffer gets tight on ${dateLabel(result.firstBelowBuffer)}.`:'Your buffer holds in this scenario.';
     const text=result.firstNegative?`The projected balance drops below zero on ${dateLabel(result.firstNegative)}. The lowest balance is ${money(result.lowestBalance)}.`:warning?`The lowest projected balance is ${money(result.lowestBalance)}, which is ${money(Math.max(0,plan.buffer-result.lowestBalance))} below your chosen buffer.`:`The lowest projected balance stays ${money(result.headroom)} above your buffer, using the information entered.`;
-    $('scenario-summary').innerHTML=`<p class="result-kicker">${scenario.delayDays} DAYS LATER · ${scenario.incomePercent}% OF EXPECTED INCOME</p><h2 class="result-title ${warning?'alert':''}">${esc(title)}</h2><p class="result-copy">${esc(text)}</p><div class="comparison-values"><div><span>Lowest · expected plan</span><strong>${esc(money(base.lowestBalance))}</strong></div><div><span>Lowest · your scenario</span><strong class="${result.lowestBalance<0?'danger':''}">${esc(money(result.lowestBalance))}</strong></div></div>`;
+    const scope=selected?`Only: ${selected.name}`:incomes.length?'All expected payments':'No adjustable income in this window';
+    const assumption=incomes.length?`${scenario.delayDays} DAYS LATER · ${scenario.incomePercent}% RECEIVED`:'PURCHASE PREVIEW';
+    $('scenario-summary').innerHTML=`<p class="result-kicker">${esc(assumption)}</p><p class="scenario-scope">${esc(scope)}</p><h2 class="result-title ${warning?'alert':''}">${esc(title)}</h2><p class="result-copy">${esc(text)}</p><div class="comparison-values"><div><span>Lowest · expected plan</span><strong>${esc(money(base.lowestBalance))}</strong></div><div><span>Lowest · your scenario</span><strong class="${result.lowestBalance<0?'danger':''}">${esc(money(result.lowestBalance))}</strong></div></div>`;
+    const purchaseText=scenario.purchaseAmount>0?`Purchase: ${money(scenario.purchaseAmount)} on ${dateLabel(scenario.purchaseDate)}. `:'';
+    let impact='';
+    if(selected){
+      const shifted=F.addDays(selected.date,scenario.delayDays),amount=Math.round(Math.round(selected.amount*100)*scenario.incomePercent/100)/100;
+      impact=`${money(selected.amount)} on ${dateLabel(selected.date)} becomes ${money(amount)} on ${dateLabel(shifted)}.${shifted>F.addDays(F.today(),days-1)?' The delayed payment falls outside this forecast window.':''} `;
+    }
+    $('scenario-impact').textContent=impact+purchaseText+'Preview only. Your saved plan has not changed.';
     chart('scenario-chart',base,result,true);$('scenario-table').innerHTML=dailyTable(base,result,true);
-    const hasExpected=plan.incomes.some(i=>i.status==='planned'&&i.confidence==='expected'&&i.date>=F.today()&&i.date<=F.addDays(F.today(),days-1));
+    const hasExpected=incomes.length>0;
     $('scenario-next').innerHTML=!hasExpected?'<strong>No adjustable income in this window.</strong>Add an upcoming income entry labelled “Expected” to test a delay or a smaller payment. You can still preview a purchase.':warning?'<strong>A useful next step</strong>Check the expected payment date with the payer and review optional expenses before committing. Any bill-date change requires agreement with the provider. This tool cannot guarantee a payment or resolve an income shortfall.':'<strong>Keep the assumptions current</strong>This estimate only knows what you entered. Review your balance and missing expenses before making a spending decision.';
   }
   function renderSettings(){ $('setting-balance').value=plan.balance;$('setting-currency').value=plan.currency;$('setting-daily').value=plan.dailyEssentials;$('setting-buffer').value=plan.buffer; }
@@ -744,7 +818,7 @@
     }else return;
     try{commit(next);toast(action==='delete'?'Entry removed.':action==='undo'?'Recording reversed. Check your balance.':'Payment recorded. Balance updated.');}catch(err){toast(err.message);}
   }
-  function resetScenario(){scenario={delayDays:0,incomePercent:100,purchaseAmount:0,purchaseDate:F.today()};$('delay').value=0;$('percent').value=100;$('purchase').value=0;$('purchase-date').value=F.today();$('scenario-error').textContent='';renderScenario();}
+  function resetScenario(){scenarioNotice='';scenario={incomeId:null,delayDays:0,incomePercent:100,purchaseAmount:0,purchaseDate:F.today()};$('delay').value=0;$('percent').value=100;$('purchase').value=0;$('purchase-date').value=F.today();$('scenario-error').textContent='';renderScenario();}
   function replacePlan(next,isDemo){corrupted=false;demo=isDemo;filter='all';resetScenario();commit(next);$('entry-editor').hidden=true;}
   document.addEventListener('click',e=>{
     const nav=e.target.closest('[data-nav]');if(nav){navigate(nav.dataset.nav,true);return;}
@@ -776,15 +850,17 @@
       commit(next);$('entry-editor').hidden=true;$('add-entry').focus();toast(id?'Entry updated.':count>1?`${count} dated entries added.`:'Entry added to your plan.');
     }catch(err){$('entry-error').textContent=err.message;}
   });
-  const readScenario=()=>({delayDays:Number($('delay').value),incomePercent:Number($('percent').value),purchaseAmount:Number($('purchase').value),purchaseDate:$('purchase-date').value});
+  const readScenario=()=>({incomeId:$('scenario-income').value||null,delayDays:Number($('delay').value),incomePercent:Number($('percent').value),purchaseAmount:Number($('purchase').value),purchaseDate:$('purchase-date').value});
   function applyScenario(){
     const next=readScenario();const end=F.addDays(F.today(),days-1);
     if(next.purchaseAmount>0&&(next.purchaseDate<F.today()||next.purchaseDate>end))throw Error(`Choose a purchase date between ${dateLabel(F.today())} and ${dateLabel(end)}.`);
     if(Math.abs(next.purchaseAmount*100-Math.round(next.purchaseAmount*100))>1e-6)throw Error('Use at most 2 decimal places for the purchase amount.');
-    forecast('scenario',next);scenario=next;renderScenario();$('scenario-error').textContent='';
+    forecast('scenario',next);scenario=next;scenarioNotice='';renderScenario();$('scenario-error').textContent='';
   }
   $('scenario-form').addEventListener('submit',e=>{e.preventDefault();try{applyScenario();toast('Comparison updated. Your saved plan is unchanged.');}catch(err){$('scenario-error').textContent=err.message;}});
   ['delay','percent'].forEach(id=>$(id).addEventListener('input',()=>{try{applyScenario();}catch(err){$('scenario-error').textContent=err.message;}}));
+  $('scenario-income').addEventListener('change',()=>{try{applyScenario();}catch(err){$('scenario-error').textContent=err.message;}});
+  $('adjust-scenario').addEventListener('click',()=>{$('scenario-form').scrollIntoView({block:'start'});($('scenario-income').disabled?$('purchase'):$('scenario-income')).focus({preventScroll:true});});
   $('reset-scenario').addEventListener('click',resetScenario);
   $('settings-form').addEventListener('submit',e=>{
     e.preventDefault();const next={...structuredClone(plan),balance:Number($('setting-balance').value),currency:$('setting-currency').value,dailyEssentials:Number($('setting-daily').value),buffer:Number($('setting-buffer').value),balanceUpdatedAt:F.today()};

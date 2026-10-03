@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#183f35">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A private, local cash-flow planning prototype for uncertain income.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<title>Cashstead · Make room for uncertainty</title>
+<style>:root{--paper:#f7f6f0;--surface:#fdfcf7;--ink:#243e34;--muted:#637267;--line:#dedfd4;--green:#183f35;--leaf:#bed397;--orange:#b55230;--red:#a43d32;--wash:#eaeedc;--body:"Aptos","Segoe UI",sans-serif;--display:"Palatino Linotype","Book Antiqua",Palatino,serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}button,input,select{font:inherit}button,a,input,select,summary{ -webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}a{color:inherit}button,input,select{border-radius:6px}button{transition:background .15s,color .15s}button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #bb753d;outline-offset:3px}[hidden]{display:none!important}h1,h2,h3,p{margin:0}h1,h2{font-weight:400}h2{font-family:var(--display);font-size:27px;line-height:1.25}h3{font-size:17px;font-weight:600}small{font-size:12px}.shell{display:grid;grid-template-columns:236px minmax(0,1fr);min-height:100vh}.sidebar{background:var(--green);color:#f0f1df;padding:40px 25px 26px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}.brand{font-size:28px;letter-spacing:-1.2px;font-weight:650;text-decoration:none;display:flex;align-items:center;gap:11px}.brand-dot{color:var(--leaf);margin-left:-11px}.brand-mark{display:flex;gap:3px;align-items:flex-end;transform:rotate(-9deg);height:23px}.brand-mark i{display:block;width:5px;height:11px;background:var(--leaf);border-radius:5px}.brand-mark i:nth-child(2){height:21px}.brand-mark i:nth-child(3){height:16px}.brand-caption{font-size:12px;color:#bfcdbb;margin-top:8px}.sidebar nav{display:grid;gap:8px;margin-top:57px}.nav-item{border:0;background:transparent;color:#c8d5c8;text-align:left;padding:13px 15px;font-size:14px;display:flex;gap:13px;align-items:center}.nav-item span{font-size:21px;line-height:1;width:21px}.nav-item.active{background:#32574a;color:#f6f7e9}.nav-item:hover{background:#2b5145;color:#f6f7e9}.sidebar-note{margin-top:auto;padding-top:45px}.small-cap,.eyebrow{font-size:10px;font-weight:700;letter-spacing:1.9px}.small-cap{color:var(--leaf)}.sidebar-note p{font-family:var(--display);font-size:20px;line-height:1.45;margin:13px 0 38px;color:#e4e9d7}.local-lock{font-size:12px;display:flex;align-items:center;gap:7px;margin-bottom:5px}.local-lock svg{width:16px;fill:none;stroke:currentColor;stroke-width:1.4}.sidebar-note small{font-size:10px;color:#bfcdbb}.workspace{min-width:0}.topbar{height:75px;border-bottom:1px solid var(--line);padding:0 42px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted)}.topbar-right{display:flex;align-items:center;gap:8px}.privacy-dot{height:6px;width:6px;border-radius:50%;background:#527948}.demo-banner{background:#e9eddc;padding:13px 42px;display:flex;justify-content:space-between;align-items:center;gap:18px;font-size:12px}.demo-banner strong{font-weight:650}.demo-banner .text-button{font-size:12px;white-space:nowrap}main{max-width:1510px;margin:auto;padding:37px 42px 0}.page-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:32px}.eyebrow{color:#5d734d;margin-bottom:14px}h1{font-family:var(--display);font-size:clamp(37px,3.8vw,58px);letter-spacing:-1.8px;line-height:1.05}h1 em{font-weight:400;color:#57714c}#page-description{font-size:13px;color:var(--muted);max-width:470px;margin-top:16px;line-height:1.7}.heading-controls{display:grid;gap:7px;min-width:145px;padding-bottom:3px}.heading-controls label{font-size:11px;color:var(--muted)}.heading-controls select{background:var(--surface)}#asof-label{font-size:10px;color:var(--muted)}input,select{border:1px solid #bbc4b6;background:var(--surface);color:var(--ink);padding:10px 12px;min-width:0;width:100%;min-height:43px}input::placeholder{color:#78847b}input[type=range]{padding:0;min-height:28px;accent-color:var(--green);background:none;border:0}label{display:block;font-size:12px;font-weight:600}label input,label select{margin-top:7px;font-size:14px;font-weight:400}.overview-grid{display:grid;grid-template-columns:minmax(0,1fr) 272px;gap:25px}.forecast-panel{background:var(--surface);border:1px solid var(--line);padding:27px 27px 16px;border-radius:9px;min-width:0}.panel-heading{display:flex;justify-content:space-between;gap:10px;align-items:center}.panel-heading h2{font-size:23px}.panel-heading p{font-size:11px;color:var(--muted);margin-top:6px}.subtle-tag{font-size:9px;letter-spacing:1.5px;color:#6f7e68;white-space:nowrap}.summary-stats{display:flex;flex-wrap:wrap;gap:25px;margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}.stat-label{font-size:11px;color:var(--muted);display:block}.stat-value{font-size:24px;font-weight:550;letter-spacing:-.8px;font-variant-numeric:tabular-nums;display:block;margin-top:4px}.stat-value.negative{color:var(--red)}.stat-foot{font-size:10px;color:var(--muted)}.chart{min-width:0;margin-top:19px}.chart svg{width:100%;height:auto;display:block;overflow:visible;font-family:var(--body)}.chart text{fill:var(--muted);font-size:10px}.chart-legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:10px;color:var(--muted);margin:10px 0 19px}.chart-legend span{display:flex;align-items:center;gap:6px}.legend-line{width:18px;border-top:2px solid var(--green);display:inline-block}.legend-line.dashed{border-top:2px dashed #a8763f}.legend-line.buffer{border-top:1px dotted #74825b}.legend-line.scenario-line{border-top:2px dashed var(--orange)}.fine-print{font-size:10px;color:var(--muted);line-height:1.65;margin-top:13px}.insight-panel{background:var(--wash);border:1px solid #dce2cc;border-radius:9px;padding:27px 23px;display:flex;flex-direction:column}.insight-panel .eyebrow{font-size:9px;letter-spacing:1.4px}.insight-panel h2{font-size:29px;letter-spacing:-.7px}.insight-panel>p{font-size:12px;color:#58674f;line-height:1.7;margin:13px 0}.scenario-illustration{margin:10px 0 23px;font-size:10px;color:#5e7053}.scenario-illustration div{display:flex;justify-content:space-between;align-items:center;margin:11px 0;position:relative}.scenario-illustration div:before{content:"";width:100%;height:1px;position:absolute;background:#b5c39e}.scenario-illustration i{width:8px;height:8px;background:#cbd5b7;border:1px solid #9cae81;border-radius:50%;position:relative}.scenario-illustration .filled{background:var(--green);border-color:var(--green);width:13px;height:13px}.scenario-illustration b{margin-left:70px;font-size:15px}.button{padding:11px 16px;min-height:44px;font-weight:600;font-size:12px;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;gap:15px;text-decoration:none}.button.primary{background:var(--green);color:#f6f6e9}.button.primary:hover{background:#2e594a}.button.cream{background:var(--surface);border-color:#c7cfb6;color:var(--ink);font-size:11px;padding:11px 10px;justify-content:space-between}.button.secondary{background:transparent;color:var(--ink);border-color:#b7c3b1}.button.secondary:hover,.button.cream:hover{background:#e0e7d1}.text-button{border:0;background:transparent;color:var(--green);font-size:12px;font-weight:600;padding:9px 0;min-height:40px;text-align:left}.text-button:hover{text-decoration:underline}.danger{color:var(--red)!important}.insight-copy{border-top:1px solid #cdd6bc;margin-top:24px;padding-top:18px;font-size:11px;line-height:1.65;color:#526247}.insight-copy strong{display:block;color:var(--green);font-weight:650;margin-bottom:5px}.upcoming{margin-top:32px}.section-heading{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:19px}.section-heading h2{font-size:25px}.section-heading p{font-size:12px;color:var(--muted);margin-top:5px}.entry-row{display:grid;grid-template-columns:40px minmax(100px,1fr) auto auto;align-items:center;gap:14px;padding:15px 0;border-bottom:1px solid var(--line)}.entry-icon{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:#e3eada;color:#3f6248}.entry-icon.out{background:#f0e5d7;color:#916c3d}.entry-name{font-size:13px;font-weight:600;overflow-wrap:anywhere}.entry-meta{font-size:11px;color:var(--muted);margin-top:3px}.entry-amount{font-size:14px;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}.entry-date{font-size:11px;color:var(--muted);text-align:right;min-width:67px}.entry-actions{display:flex;gap:13px;justify-content:flex-end;flex-wrap:wrap}.entry-actions button{font-size:11px}.ledger-row{grid-template-columns:38px minmax(110px,1fr) auto minmax(160px,auto)}.tag{display:inline-block;font-size:9px;padding:2px 7px;background:#e7ebdf;border-radius:3px;color:#455e42;margin-left:7px;font-weight:500}.tag.overdue{color:#94412b;background:#f5e4d8}.tag.recorded{background:#e6e8e1;color:#566151}.warning{padding:13px 18px;background:#f5e7d4;color:#7b4824;font-size:12px;margin:0 0 20px;border:1px solid #e3cfae;border-radius:6px}.warning button{margin-left:15px;color:#703d1a}.workspace>#storage-warning{margin:15px 42px}.empty{padding:45px 20px;text-align:center;background:#eeefe7;border-radius:8px;font-size:13px;color:var(--muted)}.empty h3{color:var(--ink);margin-bottom:7px}.empty .button{margin-top:17px}.entry-editor{padding:24px;background:#edf0e5;border:1px solid #d0d9c4;border-radius:9px;margin:0 0 25px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.form-help{font-size:11px;color:var(--muted);line-height:1.75;margin:16px 0}.error{color:var(--red);font-size:12px;margin-top:12px}.filter-row{display:flex;gap:6px;margin:26px 0 8px;flex-wrap:wrap}.filter{border:1px solid transparent;background:transparent;color:var(--muted);padding:8px 14px;font-size:12px;min-height:40px}.filter.active{background:#e4e9da;color:var(--ink);border-color:#d2dbc5}.filter:hover{background:#e9ecdf}.scenario-layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:36px}.scenario-controls{padding:25px;background:#eaeedf;border:1px solid #d7dfca;border-radius:8px}.scenario-controls h2{font-size:28px;margin-bottom:27px}.scenario-controls label{margin-top:20px}.scenario-controls output{float:right;font-weight:700;color:var(--green)}.range-ends{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}hr{border:0;border-top:1px solid #d0d9c4;margin:24px 0}.scenario-controls>.button{width:100%}.scenario-controls>.text-button{display:block;margin:6px auto 0}.scenario-result{min-width:0;padding:8px 0}.result-kicker{font-size:11px;color:var(--muted);margin-bottom:10px}.result-title{font-family:var(--display);font-size:32px;line-height:1.2;letter-spacing:-.5px}.result-title.alert{color:#8e432b}.result-copy{font-size:13px;color:var(--muted);margin-top:13px;line-height:1.7}.comparison-values{display:flex;gap:35px;padding:25px 0 6px}.comparison-values strong{display:block;font-size:25px;font-weight:550;letter-spacing:-.8px}.comparison-values span{font-size:11px;color:var(--muted)}.next-step{padding:18px 20px;background:#eeece0;border-radius:6px;font-size:12px;line-height:1.7;margin-top:22px}.next-step strong{display:block;margin-bottom:5px}.settings-layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:45px}.settings-form h2{font-size:30px}.settings-form>p{font-size:12px;color:var(--muted);line-height:1.8;margin:15px 0 25px}.settings-form>.form-help{font-size:11px;margin:15px 0}.data-panel{padding-left:26px;border-left:1px solid var(--line)}.data-panel h2{font-size:26px}.data-panel p{font-size:12px;line-height:1.8;color:var(--muted);margin:15px 0}.data-panel .button{width:100%;margin:5px 0}.data-panel .text-button{display:block}.file-button{position:relative;cursor:pointer;overflow:hidden}.file-button input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}.file-button:focus-within{outline:3px solid #bb753d;outline-offset:3px}footer{margin-top:42px;padding:22px 0;border-top:1px solid var(--line);font-size:10px;color:var(--muted);display:flex;justify-content:space-between;gap:15px}.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:var(--green);color:#f3f4e7;padding:14px 23px;border-radius:7px;box-shadow:0 5px 25px #183f3522;font-size:13px;z-index:20;max-width:90vw}.forecast-details{font-size:11px;color:var(--muted);margin-top:15px}.forecast-details summary{cursor:pointer;min-height:36px;padding:7px 0;color:var(--ink)}.table-scroll{max-height:290px;overflow:auto;margin:8px 0}table{width:100%;border-collapse:collapse;white-space:nowrap;font-variant-numeric:tabular-nums}th,td{padding:9px 11px;text-align:right;border-bottom:1px solid var(--line);font-size:11px}th:first-child,td:first-child{text-align:left}th{background:#ecefe3;position:sticky;top:0;font-weight:600}.skip{position:fixed;left:15px;top:-100px;padding:12px;background:var(--paper);z-index:50}.skip:focus{top:15px}main:focus{outline:none}.view{animation:enter .2s ease-out}@keyframes enter{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:1550px){main{padding-top:48px}.overview-grid{grid-template-columns:minmax(0,1fr) 310px}.insight-panel{padding:30px}.chart{margin-top:30px}}
+@media(max-width:1200px){.shell{grid-template-columns:205px minmax(0,1fr)}.sidebar{padding:30px 18px}.brand{font-size:25px}main{padding:30px 27px 0}.topbar{padding:0 27px}.demo-banner{padding:12px 27px}.overview-grid{grid-template-columns:minmax(0,1fr) 235px;gap:18px}.forecast-panel{padding:22px 20px 15px}.insight-panel{padding:23px 19px}.insight-panel h2{font-size:26px}.summary-stats{gap:20px}.stat-value{font-size:21px}.subtle-tag{display:none}.scenario-layout{grid-template-columns:275px minmax(0,1fr);gap:25px}.settings-layout{gap:25px;grid-template-columns:minmax(0,1fr) 245px}}
+@media(max-width:1000px){.shell{grid-template-columns:180px minmax(0,1fr)}.sidebar{padding:28px 14px}.brand{font-size:23px}.brand-caption{font-size:10px}.nav-item{font-size:12px;padding:12px 10px;gap:9px}.sidebar-note p{font-size:18px}.overview-grid{grid-template-columns:1fr}.insight-panel{display:grid;grid-template-columns:1fr 1fr;gap:8px 22px}.insight-panel .eyebrow{grid-column:1/-1}.insight-panel h2{font-size:26px}.insight-panel h2 br{display:none}.insight-panel>p{margin:0}.scenario-illustration{display:none}.insight-panel .button{align-self:center}.insight-copy{margin-top:0;padding-top:0;border:0}.scenario-layout,.settings-layout{grid-template-columns:1fr}.scenario-controls{display:block}.data-panel{padding:25px 0 0;border-left:0;border-top:1px solid var(--line)}.page-heading{gap:18px}.heading-controls{min-width:135px}.demo-banner{flex-wrap:wrap;gap:0}.entry-actions{gap:8px}.ledger-row{grid-template-columns:35px minmax(100px,1fr) auto}.ledger-row .entry-actions{grid-column:2/-1;justify-content:flex-start}.comparison-values{gap:40px}}
+@media(max-width:700px){.shell{display:block}.sidebar{position:static;height:auto;padding:20px 20px 0}.brand{font-size:27px}.brand-caption,.sidebar-note{display:none}.sidebar nav{display:flex;gap:4px;margin-top:20px;justify-content:space-between}.nav-item{font-size:11px;flex:1;justify-content:center;padding:12px 3px;border-radius:5px 5px 0 0;gap:6px;white-space:nowrap}.nav-item span{display:none}.topbar{height:48px;padding:0 20px;font-size:10px}.demo-banner{padding:12px 20px;font-size:11px;line-height:1.7}.demo-banner .text-button{min-height:32px}main{padding:28px 20px 0}.page-heading{display:block;margin-bottom:24px}h1{font-size:42px;letter-spacing:-1.4px}.eyebrow{font-size:9px;letter-spacing:1.6px}#page-description{font-size:12px;max-width:390px}.heading-controls{display:grid;grid-template-columns:1fr 145px;align-items:center;margin-top:21px;gap:3px 12px}.heading-controls label{grid-column:1;grid-row:1}.heading-controls select{grid-column:2;grid-row:1/3;min-height:42px}.heading-controls #asof-label{grid-column:1;grid-row:2}.forecast-panel{padding:20px 16px 12px}.panel-heading h2{font-size:22px}.summary-stats{gap:20px;margin-top:18px;padding-top:16px;justify-content:space-between}.stat-value{font-size:21px}.stat-label{font-size:10px}.stat-foot{font-size:9px}.chart{margin-top:12px}.chart-legend{font-size:9px;gap:6px 13px}.insight-panel{padding:20px;gap:12px;display:block}.insight-panel h2{margin-bottom:10px}.insight-panel>p{max-width:300px}.insight-panel .button{margin-top:18px;width:100%;font-size:12px}.insight-copy{margin-top:19px;border-top:1px solid #cdd6bc;padding-top:15px}.section-heading h2{font-size:23px}.section-heading{align-items:flex-start;gap:14px}.section-heading .text-button{font-size:11px;white-space:nowrap}.entry-row{gap:10px;grid-template-columns:32px minmax(0,1fr) auto}.entry-icon{width:31px;height:31px}.entry-date{grid-column:2;grid-row:2;text-align:left;margin-top:-10px}.entry-name{font-size:12px}.entry-meta{font-size:10px}.entry-amount{font-size:13px}.entry-actions{grid-column:2/-1}.upcoming{margin-top:28px}.form-grid{grid-template-columns:1fr;gap:15px}.entry-editor{padding:20px 16px}.entry-editor .section-heading{align-items:center}.filter{font-size:11px;padding:8px 12px}.scenario-layout{gap:26px}.scenario-controls{padding:23px 20px}.scenario-controls h2{font-size:27px}.result-title{font-size:30px}.comparison-values{gap:30px}.comparison-values strong{font-size:24px}.settings-form h2{font-size:28px}.settings-layout{gap:30px}footer{flex-direction:column;gap:5px;margin-top:30px}.workspace>#storage-warning{margin:15px 20px}.warning{font-size:11px}.tag{margin-left:4px}.button{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(max-width:360px){.sidebar{padding:17px 12px 0}.brand{font-size:25px}.sidebar nav{gap:0;flex-wrap:wrap}.nav-item{flex:1 1 45%;padding:10px 3px}.topbar{padding:0 12px;gap:10px;align-items:center}.topbar-right{max-width:95px}.demo-banner{padding:12px}.demo-banner .text-button{white-space:normal}main{padding:25px 12px 0}h1{font-size:clamp(29px,10.6vw,38px);letter-spacing:-1.3px}.heading-controls{display:block}.heading-controls select{margin-top:8px}#asof-label{display:block;margin-top:5px}.summary-stats{gap:14px}.stat-value{font-size:20px}.section-heading{flex-wrap:wrap}.forecast-panel{padding:17px 12px}.entry-row{grid-template-columns:27px minmax(0,1fr)}.entry-amount{grid-column:2}.entry-date{grid-row:auto;margin-top:-5px}.comparison-values{flex-wrap:wrap;gap:15px}.comparison-values strong{font-size:22px}.scenario-controls{padding:19px 14px}.scenario-controls output{float:none;display:block;margin-top:4px}.filter{padding:8px 10px}.toast{font-size:12px;padding:12px 16px;width:90vw}.button{white-space:normal}.chart-legend{font-size:9px}}
+
+.setup-guide{display:flex;align-items:center;gap:25px;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 0 25px;margin-bottom:25px}.setup-guide h2{font-size:25px}.setup-guide p{font-size:12px;color:var(--muted);max-width:480px;margin-top:10px}.setup-guide .eyebrow{margin-bottom:8px}.setup-links{display:grid;min-width:160px}.repeat-preview{font-size:12px;background:var(--surface);padding:12px;margin:0 0 16px;line-height:1.8;overflow-wrap:anywhere}@media(max-width:700px){.setup-guide{display:block}.setup-links{margin-top:14px}.entry-actions button{min-height:44px}.chart{overflow-x:auto}.chart svg{min-width:420px}.panel-heading h2{overflow-wrap:anywhere}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="shell">
+<aside class="sidebar">
+<a class="brand" href="#overview" aria-label="Cashstead home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>cashstead<span class="brand-dot">.</span></a>
+<p class="brand-caption">A little more breathing room.</p>
+<nav aria-label="Main navigation">
+<button class="nav-item active" data-nav="overview"><span aria-hidden="true">◫</span> Overview</button>
+<button class="nav-item" data-nav="ledger"><span aria-hidden="true">≡</span> Money in & out</button>
+<button class="nav-item" data-nav="scenario"><span aria-hidden="true">↗</span> What if?</button>
+<button class="nav-item" data-nav="settings"><span aria-hidden="true">⚙</span> Your plan</button>
+</nav>
+<div class="sidebar-note"><span class="small-cap">BUILT FOR REAL LIFE</span><p>Income can be uncertain.<br>Your next step doesn’t have to be.</p><div class="local-lock"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="9" width="12" height="8" rx="2"/><path d="M6 9V6a4 4 0 0 1 8 0v3"/></svg>Stored in this browser</div><small>Demo v0.2 · no bank connection</small></div>
+</aside>
+<div class="workspace">
+<header class="topbar"><span id="today-label"></span><span class="topbar-right"><span class="privacy-dot"></span> Your numbers stay here</span></header>
+<div id="storage-warning" class="warning" role="alert" hidden></div>
+<div id="demo-banner" class="demo-banner"><span><strong>You’re exploring a sample plan.</strong> Try a late payment and see what changes.</span><button id="start-own" class="text-button">Use my own numbers <span aria-hidden="true">↗</span></button></div>
+<main id="main" tabindex="-1">
+<section class="page-heading"><div><div class="eyebrow" id="page-eyebrow">YOUR MONEY, LOOKING FORWARD</div><h1 id="page-title">Make room for<br><em>the unexpected.</em></h1><p id="page-description">See your bills and expected income together. Then give your plan a little room to breathe.</p></div><div class="heading-controls"><label for="horizon">Planning window</label><select id="horizon"><option value="14">Next 14 days</option><option value="30" selected>Next 30 days</option><option value="60">Next 60 days</option><option value="90">Next 90 days</option></select><span id="asof-label"></span></div></section>
+<div id="stale-banner" class="warning" hidden></div>
+<section id="view-overview" class="view">
+<section id="setup-guide" class="setup-guide" aria-labelledby="setup-title" hidden><div><div class="eyebrow">A SMALL START</div><h2 id="setup-title">Build a picture of the next month.</h2><p>Review the cash you have today, then add your next payment and the bills due before it arrives.</p></div><div class="setup-links"><button class="text-button" data-nav="settings">Review starting balance →</button><button class="text-button" data-nav="ledger">Add income &amp; bills →</button></div></section>
+<div class="overview-grid">
+<div class="forecast-panel"><div class="panel-heading"><div><h2>Your cash-flow outlook</h2><p id="forecast-subtitle">An estimate, not a spending guarantee.</p></div><span class="subtle-tag">DAY BY DAY</span></div>
+<div id="summary-stats" class="summary-stats"></div>
+<div id="chart" class="chart"></div>
+<div class="chart-legend"><span><i class="legend-line"></i>Expected payments arrive</span><span><i class="legend-line dashed"></i>Cash already available only</span><span><i class="legend-line buffer"></i>Your buffer</span></div>
+<details class="forecast-details"><summary>View day-by-day numbers</summary><div id="forecast-table" class="table-scroll"></div></details>
+<p class="fine-print">End-of-day estimates. Daily essentials are reserved each day. Payments due on the same day are combined; intraday shortfalls are not shown.</p></div>
+<aside class="insight-panel"><div class="eyebrow">A CHECK BEFORE YOU COMMIT</div><h2>What if life<br>changes the plan?</h2><p>A late payment shouldn’t be a surprise in your forecast.</p><div class="scenario-illustration" aria-hidden="true"><span>Expected</span><div><i></i><i></i><i></i><i class="filled"></i><i></i><i></i><i></i></div><span>Arrives later <b>→</b></span></div><button class="button cream" data-nav="scenario">Test a different outcome <span aria-hidden="true">↗</span></button><div id="overview-insight" class="insight-copy"></div></aside>
+</div>
+<section class="upcoming"><div class="section-heading"><div><h2>Coming up</h2><p>The next entries in your plan.</p></div><button class="text-button" data-nav="ledger">Manage all entries <span aria-hidden="true">→</span></button></div><div id="upcoming-list"></div></section>
+</section>
+<section id="view-ledger" class="view" hidden>
+<div class="section-heading"><div><h2>Give every commitment a date.</h2><p>Recorded payments are reflected in your current balance.</p></div><button id="add-entry" class="button primary">+ Add an entry</button></div>
+<div id="entry-editor" class="entry-editor" hidden>
+<form id="entry-form"><div class="section-heading"><h3 id="entry-editor-title">New entry</h3><button type="button" id="close-editor" class="text-button">Cancel</button></div><input id="entry-id" type="hidden"><div class="form-grid">
+<label>Entry type<select id="entry-type"><option value="income">Money coming in</option><option value="bill">Bill / planned expense</option></select></label>
+<label>Name<input id="entry-name" required maxlength="100" placeholder="e.g. Client payment" autocomplete="off"></label>
+<label>Amount <span class="currency-label"></span><input id="entry-amount" type="number" min="0.01" max="1000000000" step="0.01" required inputmode="decimal"></label>
+<label>Expected date<input id="entry-date" type="date" required></label>
+<label id="repeat-field">Repeat this entry<select id="entry-repeat"><option value="once">Once only</option><option value="weekly">Every week</option><option value="monthly">Every month</option></select></label>
+<label id="count-field" hidden>Number of occurrences (including first)<input id="entry-count" type="number" min="2" max="12" step="1" value="3"></label>
+<label id="confidence-field">How certain is the income?<select id="entry-confidence"><option value="expected">Expected · can change in scenarios</option><option value="confirmed">Confirmed · held fixed in scenarios</option></select></label>
+</div><p class="form-help">“Confirmed” is your label, not verification. Neither type is counted in the cash-only forecast until received. Repeats create separate dated entries, up to 12, rather than an ongoing subscription. Each can be edited or deleted independently. Monthly repeats keep the original day where possible, or use the last day of a shorter month.</p><p id="repeat-preview" class="repeat-preview" role="status" hidden></p><button type="submit" class="button primary">Save entry</button><p id="entry-error" role="alert" class="error"></p></form>
+</div>
+<div class="filter-row" role="group" aria-label="Filter entries"><button data-filter="all" class="filter active" aria-pressed="true">All entries</button><button data-filter="income" class="filter" aria-pressed="false">Income</button><button data-filter="bill" class="filter" aria-pressed="false">Bills</button><button data-filter="settled" class="filter" aria-pressed="false">Recorded</button></div>
+<div id="ledger-list"></div><p class="fine-print">Record received / paid only when the transaction has happened. These actions update your saved balance once. If you already updated your balance manually, do not record the same transaction again.</p>
+</section>
+<section id="view-scenario" class="view" hidden>
+<div class="scenario-layout"><form id="scenario-form" class="scenario-controls"><div class="eyebrow">CHANGE THE ASSUMPTIONS</div><h2>Give your plan a stress test.</h2><label for="delay">Expected income arrives later <output id="delay-value" for="delay">7 days</output></label><input id="delay" type="range" min="0" max="60" value="7" step="1"><div class="range-ends"><span>On time</span><span>60 days late</span></div>
+<label for="percent">Expected income received <output id="percent-value" for="percent">100%</output></label><input id="percent" type="range" min="0" max="100" value="100" step="5"><div class="range-ends"><span>Nothing arrives</span><span>Full amount</span></div>
+<p class="form-help">Only income labelled “Expected” changes. Confirmed income stays fixed. This is a possibility to explore, not a prediction.</p><hr><h3>Considering a purchase?</h3><label for="purchase">One-off spend <span class="currency-label"></span><input id="purchase" type="number" min="0" max="1000000000" step="0.01" value="0" inputmode="decimal"></label><label for="purchase-date">Purchase date<input id="purchase-date" type="date" required></label><p class="form-help">Preview only. This does not add a bill or change your saved balance.</p><button class="button primary" type="submit">Update comparison</button><button id="reset-scenario" class="text-button" type="button">Reset assumptions</button><p id="scenario-error" role="alert" class="error"></p></form>
+<div class="scenario-result"><div id="scenario-summary"></div><div id="scenario-chart" class="chart"></div><div class="chart-legend"><span><i class="legend-line"></i>Expected plan</span><span><i class="legend-line scenario-line"></i>Your scenario</span></div><div id="scenario-next" class="next-step"></div><details class="forecast-details"><summary>Compare day-by-day numbers</summary><div id="scenario-table" class="table-scroll"></div></details></div></div>
+</section>
+<section id="view-settings" class="view" hidden>
+<div class="settings-layout"><form id="settings-form" class="settings-form"><div class="eyebrow">THE STARTING POINT</div><h2>Your money. Your assumptions.</h2><p>Use your available bank and cash balances. Don’t include unused credit or income that hasn’t arrived.</p><div class="form-grid">
+<label>Current balance<input id="setting-balance" type="number" min="-1000000000" max="1000000000" step="0.01" required inputmode="decimal"></label><label>Currency<select id="setting-currency"><option value="INR">INR · Indian rupee</option><option value="USD">USD · US dollar</option><option value="EUR">EUR · Euro</option><option value="GBP">GBP · British pound</option><option value="CAD">CAD · Canadian dollar</option><option value="AUD">AUD · Australian dollar</option></select></label>
+<label>Daily essentials allowance<input id="setting-daily" type="number" min="0" max="1000000000" step="0.01" required inputmode="decimal"></label><label>Buffer to keep aside<input id="setting-buffer" type="number" min="0" max="1000000000" step="0.01" required inputmode="decimal"></label></div><p class="form-help">Essentials are a daily estimate for food, transport and similar spending. Don’t also add the same costs as bills. The buffer is a target, not a separate deduction. Refresh your balance regularly; daily allowances do not automatically change it.</p><p class="form-help">Changing currency only relabels amounts, it does not convert them. One currency per plan.</p><button type="submit" class="button primary">Save & refresh balance</button><p id="settings-error" class="error" role="alert"></p></form>
+<aside class="data-panel"><div class="eyebrow">YOU’RE IN CONTROL</div><h2>A private place to plan.</h2><p>Your plan is saved in this browser on this device. No account, trackers, AI service or bank access.</p><p>On the public demo, GitHub serves the page and may log connection details such as your IP address. The app does not send your entered amounts to the host. Local and online plans stay separate; transfer them with a backup.</p><p>Browser storage is not an encrypted vault. Anyone using this browser profile may access it. Clearing browser data can erase your plan. Pages hosted under the same domain share browser storage; do not treat this demo as a secure financial vault.</p><button id="export-plan" class="button secondary">Download a backup</button><label class="button secondary file-button">Restore a backup<input id="import-plan" type="file" accept="application/json,.json"></label><p class="fine-print">Backups contain financial amounts in readable JSON. Store them privately.</p><hr><button id="load-demo" class="text-button">Load sample plan</button><button id="clear-plan" class="text-button danger">Delete saved data</button><p id="import-error" class="error" role="alert"></p></aside></div>
+</section>
+<footer><span>Cashstead · Demo v0.2</span><span>Planning estimates only. No financial advice or guaranteed outcomes.</span></footer>
+</main>
+</div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<script>/* Cashstead forecast engine. Pure JS, no dependencies, browser + node. */
+(function (root, factory) {
+  var api = factory();
+  root.Cashflow = api;
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+
+  var CURRENCIES = ['INR', 'USD', 'EUR', 'GBP', 'CAD', 'AUD'];
+  var MAX_ENTRIES = 500;
+  var MAX_STRING = 100;
+  var MAX_AMOUNT = 1e9;
+  var MIN_BALANCE = -1e9;
+
+  var PLAN_KEYS = ['version', 'currency', 'balance', 'buffer', 'dailyEssentials', 'balanceUpdatedAt', 'incomes', 'bills'];
+  var INCOME_KEYS = ['id', 'name', 'amount', 'date', 'confidence', 'status'];
+  var BILL_KEYS = ['id', 'name', 'amount', 'date', 'status'];
+  var OPTION_KEYS = ['today', 'days', 'mode', 'delayDays', 'incomePercent', 'purchaseAmount', 'purchaseDate'];
+  var MODES = ['expected', 'cashOnly', 'scenario'];
+
+  var DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+  var MIN_DATE = '1000-01-01';
+  var MAX_DATE = '9999-12-31';
+
+  function isPlainObject(v) {
+    if (typeof v !== 'object' || v === null || Array.isArray(v)) return false;
+    var proto = Object.getPrototypeOf(v);
+    return proto === Object.prototype || proto === null;
+  }
+
+  function isInt(v) {
+    return typeof v === 'number' && isFinite(v) && Math.floor(v) === v;
+  }
+
+  function isLeap(y) {
+    return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+  }
+
+  function daysInMonth(y, m) {
+    if (m === 2) return isLeap(y) ? 29 : 28;
+    return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+  }
+
+  function isValidDate(s) {
+    if (typeof s !== 'string' || !DATE_RE.test(s)) return false;
+    var y = +s.slice(0, 4), m = +s.slice(5, 7), d = +s.slice(8, 10);
+    if (y < 1000 || y > 9999) return false;
+    if (m < 1 || m > 12) return false;
+    if (d < 1 || d > daysInMonth(y, m)) return false;
+    return true;
+  }
+
+  /* Howard Hinnant's days-from-civil. Timezone and DST independent. */
+  function toEpochDay(s) {
+    var y = +s.slice(0, 4), m = +s.slice(5, 7), d = +s.slice(8, 10);
+    y -= m <= 2 ? 1 : 0;
+    var era = Math.floor(y / 400);
+    var yoe = y - era * 400;
+    var doy = Math.floor((153 * (m + (m > 2 ? -3 : 9)) + 2) / 5) + d - 1;
+    var doe = yoe * 365 + Math.floor(yoe / 4) - Math.floor(yoe / 100) + doy;
+    return era * 146097 + doe - 719468;
+  }
+
+  function fromEpochDay(z) {
+    z += 719468;
+    var era = Math.floor(z / 146097);
+    var doe = z - era * 146097;
+    var yoe = Math.floor((doe - Math.floor(doe / 1460) + Math.floor(doe / 36524) - Math.floor(doe / 146096)) / 365);
+    var y = yoe + era * 400;
+    var doy = doe - (365 * yoe + Math.floor(yoe / 4) - Math.floor(yoe / 100));
+    var mp = Math.floor((5 * doy + 2) / 153);
+    var d = doy - Math.floor((153 * mp + 2) / 5) + 1;
+    var m = mp + (mp < 10 ? 3 : -9);
+    y += m <= 2 ? 1 : 0;
+    return pad4(y) + '-' + pad2(m) + '-' + pad2(d);
+  }
+
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function pad4(n) { return ('0000' + n).slice(-4); }
+
+  var MIN_EPOCH_DAY = toEpochDay(MIN_DATE);
+  var MAX_EPOCH_DAY = toEpochDay(MAX_DATE);
+
+  function addDays(date, n) {
+    if (!isValidDate(date)) throw new TypeError('addDays: invalid date "' + String(date) + '", expected YYYY-MM-DD');
+    if (!isInt(n)) throw new TypeError('addDays: n must be an integer, got ' + String(n));
+    var day = toEpochDay(date) + n;
+    if (day < MIN_EPOCH_DAY || day > MAX_EPOCH_DAY) {
+      throw new RangeError('addDays: result falls outside the supported range ' + MIN_DATE + ' to ' + MAX_DATE + ' (' + date + ' + ' + n + ' days)');
+    }
+    return fromEpochDay(day);
+  }
+
+  function today() {
+    var d = new Date();
+    return pad4(d.getFullYear()) + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+  }
+
+  function toCents(x) {
+    return Math.round(parseFloat((x * 100).toFixed(4)));
+  }
+
+  function fromCents(c) {
+    return Math.round(c) / 100;
+  }
+
+  function checkMoney(errors, label, v, opts) {
+    var min = opts && typeof opts.min === 'number' ? opts.min : 0;
+    var exclusiveMin = !!(opts && opts.exclusiveMin);
+    if (typeof v !== 'number' || !isFinite(v)) {
+      errors.push(label + ' must be a finite number');
+      return false;
+    }
+    if (exclusiveMin ? !(v > min) : v < min) {
+      errors.push(label + ' must be ' + (exclusiveMin ? 'greater than ' : 'at least ') + min);
+      return false;
+    }
+    if (Math.abs(v) > MAX_AMOUNT) {
+      errors.push(label + ' exceeds the maximum allowed amount of ' + MAX_AMOUNT);
+      return false;
+    }
+    /* More than two decimals would settle differently from the cents the engine stores. */
+    var scaled = v * 100;
+    if (Math.abs(scaled - Math.round(scaled)) > 1e-6) {
+      errors.push(label + ' must have at most 2 decimal places (got ' + v + ')');
+      return false;
+    }
+    return true;
+  }
+
+  function checkString(errors, label, v) {
+    if (typeof v !== 'string') { errors.push(label + ' must be a string'); return false; }
+    if (v.length === 0) { errors.push(label + ' must not be empty'); return false; }
+    if (v.length > MAX_STRING) { errors.push(label + ' must be at most ' + MAX_STRING + ' characters'); return false; }
+    if (v.replace(/^\s+|\s+$/g, '').length === 0) { errors.push(label + ' must not be only whitespace'); return false; }
+    return true;
+  }
+
+  function checkExtraKeys(errors, label, obj, allowed) {
+    var keys = Object.keys(obj);
+    for (var i = 0; i < keys.length; i++) {
+      if (allowed.indexOf(keys[i]) === -1) errors.push(label + ' has unexpected key "' + keys[i] + '"');
+    }
+  }
+
+  function checkEnum(errors, label, v, allowed) {
+    if (allowed.indexOf(v) === -1) {
+      errors.push(label + ' must be one of ' + allowed.join(', ') + ' (got ' + JSON.stringify(v) + ')');
+      return false;
+    }
+    return true;
+  }
+
+  function validateEntries(errors, plan, field, allowedKeys, seenIds, extraValidator) {
+    var list = plan[field];
+    if (!Array.isArray(list)) { errors.push(field + ' must be an array'); return; }
+    if (list.length > MAX_ENTRIES) {
+      errors.push(field + ' must have at most ' + MAX_ENTRIES + ' entries (got ' + list.length + ')');
+      return;
+    }
+    for (var i = 0; i < list.length; i++) {
+      var e = list[i];
+      var label = field + '[' + i + ']';
+      if (!isPlainObject(e)) { errors.push(label + ' must be an object'); continue; }
+      checkExtraKeys(errors, label, e, allowedKeys);
+      if (checkString(errors, label + '.id', e.id)) {
+        if (seenIds[e.id]) errors.push('duplicate id "' + e.id + '" at ' + label);
+        else seenIds[e.id] = true;
+      }
+      checkString(errors, label + '.name', e.name);
+      checkMoney(errors, label + '.amount', e.amount, { min: 0, exclusiveMin: true });
+      if (!isValidDate(e.date)) errors.push(label + '.date must be a valid YYYY-MM-DD date (got ' + JSON.stringify(e.date) + ')');
+      extraValidator(errors, label, e);
+    }
+  }
+
+  function validatePlan(plan) {
+    var errors = [];
+    if (!isPlainObject(plan)) {
+      return { ok: false, errors: ['plan must be an object'] };
+    }
+    checkExtraKeys(errors, 'plan', plan, PLAN_KEYS);
+    if (plan.version !== 1) errors.push('version must be 1 (got ' + JSON.stringify(plan.version) + ')');
+    checkEnum(errors, 'currency', plan.currency, CURRENCIES);
+    checkMoney(errors, 'balance', plan.balance, { min: MIN_BALANCE });
+    checkMoney(errors, 'buffer', plan.buffer, { min: 0 });
+    checkMoney(errors, 'dailyEssentials', plan.dailyEssentials, { min: 0 });
+    if (!isValidDate(plan.balanceUpdatedAt)) {
+      errors.push('balanceUpdatedAt must be a valid YYYY-MM-DD date (got ' + JSON.stringify(plan.balanceUpdatedAt) + ')');
+    }
+    var seenIds = Object.create(null);
+    validateEntries(errors, plan, 'incomes', INCOME_KEYS, seenIds, function (errs, label, e) {
+      checkEnum(errs, label + '.confidence', e.confidence, ['confirmed', 'expected']);
+      checkEnum(errs, label + '.status', e.status, ['planned', 'received']);
+    });
+    validateEntries(errors, plan, 'bills', BILL_KEYS, seenIds, function (errs, label, e) {
+      checkEnum(errs, label + '.status', e.status, ['planned', 'paid']);
+    });
+    return { ok: errors.length === 0, errors: errors };
+  }
+
+  function normalizeOptions(options) {
+    if (options === undefined || options === null) options = {};
+    if (!isPlainObject(options)) throw new TypeError('forecast: options must be an object');
+    var keys = Object.keys(options);
+    for (var i = 0; i < keys.length; i++) {
+      if (OPTION_KEYS.indexOf(keys[i]) === -1) {
+        throw new RangeError('forecast: unexpected option "' + keys[i] + '"; allowed options are ' + OPTION_KEYS.join(', '));
+      }
+    }
+    var o = {};
+    o.today = options.today === undefined ? today() : options.today;
+    if (!isValidDate(o.today)) throw new RangeError('forecast: options.today must be a valid YYYY-MM-DD date (got ' + JSON.stringify(options.today) + ')');
+
+    o.days = options.days === undefined ? 30 : options.days;
+    if (!isInt(o.days) || o.days < 7 || o.days > 90) throw new RangeError('forecast: options.days must be an integer between 7 and 90 (got ' + JSON.stringify(options.days) + ')');
+
+    o.mode = options.mode === undefined ? 'expected' : options.mode;
+    if (MODES.indexOf(o.mode) === -1) throw new RangeError('forecast: options.mode must be one of ' + MODES.join(', ') + ' (got ' + JSON.stringify(options.mode) + ')');
+
+    o.delayDays = options.delayDays === undefined ? 0 : options.delayDays;
+    if (!isInt(o.delayDays) || o.delayDays < 0 || o.delayDays > 60) throw new RangeError('forecast: options.delayDays must be an integer between 0 and 60 (got ' + JSON.stringify(options.delayDays) + ')');
+
+    o.incomePercent = options.incomePercent === undefined ? 100 : options.incomePercent;
+    if (typeof o.incomePercent !== 'number' || !isFinite(o.incomePercent) || o.incomePercent < 0 || o.incomePercent > 100) {
+      throw new RangeError('forecast: options.incomePercent must be a number between 0 and 100 (got ' + JSON.stringify(options.incomePercent) + ')');
+    }
+
+    o.purchaseAmount = options.purchaseAmount === undefined ? 0 : options.purchaseAmount;
+    if (typeof o.purchaseAmount !== 'number' || !isFinite(o.purchaseAmount) || o.purchaseAmount < 0) {
+      throw new RangeError('forecast: options.purchaseAmount must be a number >= 0 (got ' + JSON.stringify(options.purchaseAmount) + ')');
+    }
+    if (o.purchaseAmount > MAX_AMOUNT) {
+      throw new RangeError('forecast: options.purchaseAmount exceeds the maximum allowed amount of ' + MAX_AMOUNT);
+    }
+
+    o.purchaseDate = options.purchaseDate === undefined ? null : options.purchaseDate;
+    if (o.purchaseDate !== null && !isValidDate(o.purchaseDate)) {
+      throw new RangeError('forecast: options.purchaseDate must be a valid YYYY-MM-DD date (got ' + JSON.stringify(options.purchaseDate) + ')');
+    }
+    if (o.purchaseAmount > 0 && o.purchaseDate === null) {
+      throw new RangeError('forecast: options.purchaseDate is required when options.purchaseAmount is greater than 0');
+    }
+    return o;
+  }
+
+  function forecast(plan, options) {
+    var v = validatePlan(plan);
+    if (!v.ok) throw new TypeError('forecast: invalid plan - ' + v.errors.join('; '));
+    var o = normalizeOptions(options);
+
+    var startDay = toEpochDay(o.today);
+    var lastDay = startDay + o.days - 1;
+    if (lastDay > MAX_EPOCH_DAY) {
+      throw new RangeError('forecast: a ' + o.days + ' day horizon from ' + o.today + ' runs past the supported maximum date ' + MAX_DATE);
+    }
+
+    var buckets = [];
+    for (var i = 0; i < o.days; i++) buckets.push({ incomeCents: 0, billCents: 0, events: [] });
+
+    var overdueIncomeCount = 0;
+    var k;
+
+    for (k = 0; k < plan.incomes.length; k++) {
+      var inc = plan.incomes[k];
+      if (inc.status === 'received') continue;
+      var originalDay = toEpochDay(inc.date);
+      if (originalDay < startDay) {
+        /* Overdue planned income is never silently moved into today; the user must reschedule it. */
+        overdueIncomeCount++;
+        continue;
+      }
+      if (o.mode === 'cashOnly') continue;
+      var cents = toCents(inc.amount);
+      var day = originalDay;
+      if (o.mode === 'scenario' && inc.confidence === 'expected') {
+        day = originalDay + o.delayDays;
+        cents = Math.round(cents * o.incomePercent / 100);
+      }
+      if (day > lastDay) continue;
+      var bi = day - startDay;
+      buckets[bi].incomeCents += cents;
+      buckets[bi].events.push({ name: inc.name, amount: fromCents(cents), type: 'income' });
+    }
+
+    for (k = 0; k < plan.bills.length; k++) {
+      var bill = plan.bills[k];
+      if (bill.status === 'paid') continue;
+      var bDay = toEpochDay(bill.date);
+      /* Overdue planned bills land on today: they are still owed. */
+      if (bDay < startDay) bDay = startDay;
+      if (bDay > lastDay) continue;
+      var bcents = toCents(bill.amount);
+      var idx = bDay - startDay;
+      buckets[idx].billCents += bcents;
+      buckets[idx].events.push({ name: bill.name, amount: fromCents(bcents), type: 'bill' });
+    }
+
+    var purchaseCents = 0;
+    var purchaseIdx = -1;
+    if (o.mode === 'scenario' && o.purchaseAmount > 0 && o.purchaseDate !== null) {
+      var pDay = toEpochDay(o.purchaseDate);
+      if (pDay >= startDay && pDay <= lastDay) {
+        purchaseIdx = pDay - startDay;
+        purchaseCents = toCents(o.purchaseAmount);
+        buckets[purchaseIdx].events.push({ name: 'One-off purchase', amount: fromCents(purchaseCents), type: 'purchase' });
+      }
+    }
+
+    var essentialsCents = toCents(plan.dailyEssentials);
+    var bufferCents = toCents(plan.buffer);
+    var balanceCents = toCents(plan.balance);
+
+    var lowestCents = balanceCents;
+    var lowestDate = o.today;
+    var firstBelowBuffer = balanceCents < bufferCents ? o.today : null;
+    var firstNegative = balanceCents < 0 ? o.today : null;
+
+    var totalIncome = 0, totalBills = 0, totalEssentials = 0;
+    var rows = [];
+
+    for (i = 0; i < o.days; i++) {
+      var date = fromEpochDay(startDay + i);
+      var b = buckets[i];
+      balanceCents = balanceCents - essentialsCents + b.incomeCents - b.billCents;
+      if (i === purchaseIdx) balanceCents -= purchaseCents;
+      totalIncome += b.incomeCents;
+      totalBills += b.billCents;
+      totalEssentials += essentialsCents;
+      if (balanceCents < lowestCents) { lowestCents = balanceCents; lowestDate = date; }
+      if (firstBelowBuffer === null && balanceCents < bufferCents) firstBelowBuffer = date;
+      if (firstNegative === null && balanceCents < 0) firstNegative = date;
+      rows.push({
+        date: date,
+        income: fromCents(b.incomeCents),
+        bills: fromCents(b.billCents),
+        essentials: fromCents(essentialsCents),
+        balance: fromCents(balanceCents),
+        events: b.events
+      });
+    }
+
+    return {
+      rows: rows,
+      lowestBalance: fromCents(lowestCents),
+      lowestDate: lowestDate,
+      endBalance: fromCents(balanceCents),
+      headroom: fromCents(lowestCents - bufferCents),
+      firstBelowBuffer: firstBelowBuffer,
+      firstNegative: firstNegative,
+      totalIncome: fromCents(totalIncome),
+      totalBills: fromCents(totalBills),
+      totalEssentials: fromCents(totalEssentials),
+      overdueIncomeCount: overdueIncomeCount
+    };
+  }
+
+  return {
+    addDays: addDays,
+    today: today,
+    validatePlan: validatePlan,
+    forecast: forecast,
+    CURRENCIES: CURRENCIES.slice(),
+    LIMITS: { MAX_ENTRIES: MAX_ENTRIES, MAX_STRING: MAX_STRING, MAX_AMOUNT: MAX_AMOUNT, MIN_BALANCE: MIN_BALANCE }
+  };
+});
+</script>
+<script>/* Cashstead recurrence helper. Pure JS, no dependencies, browser + node.
+   Expands a start date into explicit dated occurrences for the ledger.
+   It is a one-off expansion, not a stored recurring rule. */
+(function (root, factory) {
+  var api = factory();
+  root.CashsteadSchedule = api;
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+
+  var FREQUENCIES = ['once', 'weekly', 'monthly'];
+  var MIN_COUNT = 1;
+  var MAX_COUNT = 12;
+  var MIN_YEAR = 1000;
+  var MAX_YEAR = 9999;
+
+  var DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+  function isLeap(y) {
+    return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+  }
+
+  function daysInMonth(y, m) {
+    if (m === 2) return isLeap(y) ? 29 : 28;
+    return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1];
+  }
+
+  function isInt(v) {
+    return typeof v === 'number' && isFinite(v) && Math.floor(v) === v;
+  }
+
+  function pad(n, width) {
+    var s = String(n);
+    while (s.length < width) s = '0' + s;
+    return s;
+  }
+
+  function parseDate(s) {
+    if (typeof s !== 'string' || !DATE_RE.test(s)) return null;
+    var y = Number(s.slice(0, 4)), m = Number(s.slice(5, 7)), d = Number(s.slice(8, 10));
+    if (y < MIN_YEAR || y > MAX_YEAR) return null;
+    if (m < 1 || m > 12) return null;
+    if (d < 1 || d > daysInMonth(y, m)) return null;
+    return { y: y, m: m, d: d };
+  }
+
+  function format(y, m, d) {
+    return pad(y, 4) + '-' + pad(m, 2) + '-' + pad(d, 2);
+  }
+
+  /* Days since 1970-01-01, proleptic Gregorian. No Date, so no timezone effects. */
+  function toDayNumber(y, m, d) {
+    var yy = m <= 2 ? y - 1 : y;
+    var era = Math.floor(yy / 400);
+    var yoe = yy - era * 400;
+    var mp = (m + 9) % 12;
+    var doy = Math.floor((153 * mp + 2) / 5) + d - 1;
+    var doe = yoe * 365 + Math.floor(yoe / 4) - Math.floor(yoe / 100) + doy;
+    return era * 146097 + doe - 719468;
+  }
+
+  function fromDayNumber(z) {
+    var zz = z + 719468;
+    var era = Math.floor(zz / 146097);
+    var doe = zz - era * 146097;
+    var yoe = Math.floor((doe - Math.floor(doe / 1460) + Math.floor(doe / 36524) - Math.floor(doe / 146096)) / 365);
+    var yy = yoe + era * 400;
+    var doy = doe - (365 * yoe + Math.floor(yoe / 4) - Math.floor(yoe / 100));
+    var mp = Math.floor((5 * doy + 2) / 153);
+    var d = doy - Math.floor((153 * mp + 2) / 5) + 1;
+    var m = mp < 10 ? mp + 3 : mp - 9;
+    return { y: m <= 2 ? yy + 1 : yy, m: m, d: d };
+  }
+
+  function dates(firstDate, frequency, count) {
+    var start = parseDate(firstDate);
+    if (!start) {
+      throw new Error('firstDate must be a real calendar date as YYYY-MM-DD between ' +
+        MIN_YEAR + '-01-01 and ' + MAX_YEAR + '-12-31, got ' + JSON.stringify(firstDate));
+    }
+    if (FREQUENCIES.indexOf(frequency) === -1) {
+      throw new Error('frequency must be one of ' + FREQUENCIES.join(', ') + ', got ' + JSON.stringify(frequency));
+    }
+    if (!isInt(count) || count < MIN_COUNT || count > MAX_COUNT) {
+      throw new Error('count must be a whole number from ' + MIN_COUNT + ' to ' + MAX_COUNT +
+        ', got ' + JSON.stringify(count));
+    }
+    if (frequency === 'once' && count !== 1) {
+      throw new Error('frequency "once" allows only count 1, got ' + JSON.stringify(count));
+    }
+
+    var out = [format(start.y, start.m, start.d)];
+    if (frequency === 'once') return out;
+
+    var i, y, m, d, parts;
+    if (frequency === 'weekly') {
+      var base = toDayNumber(start.y, start.m, start.d);
+      for (i = 1; i < count; i++) {
+        parts = fromDayNumber(base + i * 7);
+        if (parts.y > MAX_YEAR) {
+          throw new Error('the schedule runs past ' + MAX_YEAR + '-12-31; reduce count or move firstDate earlier');
+        }
+        out.push(format(parts.y, parts.m, parts.d));
+      }
+      return out;
+    }
+
+    /* monthly: every occurrence is anchored to the original day of month and
+       clamped to the length of the target month, so Jan 31 -> Feb 28 -> Mar 31. */
+    for (i = 1; i < count; i++) {
+      var monthIndex = (start.m - 1) + i;
+      y = start.y + Math.floor(monthIndex / 12);
+      m = (monthIndex % 12) + 1;
+      if (y > MAX_YEAR) {
+        throw new Error('the schedule runs past ' + MAX_YEAR + '-12-31; reduce count or move firstDate earlier');
+      }
+      d = Math.min(start.d, daysInMonth(y, m));
+      out.push(format(y, m, d));
+    }
+    return out;
+  }
+
+  return {
+    dates: dates,
+    FREQUENCIES: FREQUENCIES.slice(),
+    LIMITS: { MIN_COUNT: MIN_COUNT, MAX_COUNT: MAX_COUNT, MIN_YEAR: MIN_YEAR, MAX_YEAR: MAX_YEAR }
+  };
+});
+</script>
+<script>(() => {
+  'use strict';
+  const F = globalThis.Cashflow;
+  const $ = id => document.getElementById(id);
+  const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const KEY = 'cashstead.plan.v1';
+  let demo = true, storageBlocked = false, corrupted = false, plan, active = 'overview', filter = 'all', days = 30, toastTimer;
+  let scenario = {delayDays:7, incomePercent:100, purchaseAmount:0, purchaseDate:F.today()};
+  const round = n => Math.round((n + Number.EPSILON) * 100) / 100;
+  const uid = () => globalThis.crypto?.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2);
+  const emptyPlan = () => ({version:1,currency:'INR',balance:0,buffer:0,dailyEssentials:0,balanceUpdatedAt:F.today(),incomes:[],bills:[]});
+  function samplePlan() {
+    const t = F.today(), d = n => F.addDays(t,n);
+    return {version:1,currency:'INR',balance:28500,buffer:5000,dailyEssentials:450,balanceUpdatedAt:t,
+      incomes:[{id:'sample-i1',name:'Website project · final payment',amount:24000,date:d(6),confidence:'expected',status:'planned'},
+      {id:'sample-i2',name:'Monthly retainer',amount:18000,date:d(17),confidence:'confirmed',status:'planned'},
+      {id:'sample-i3',name:'Design project · deposit',amount:12000,date:d(24),confidence:'expected',status:'planned'}],
+      bills:[{id:'sample-b1',name:'Rent',amount:16000,date:d(3),status:'planned'},
+      {id:'sample-b2',name:'Internet & phone',amount:1800,date:d(5),status:'planned'},
+      {id:'sample-b3',name:'Insurance',amount:4200,date:d(11),status:'planned'},
+      {id:'sample-b4',name:'Electricity',amount:2300,date:d(19),status:'planned'},
+      {id:'sample-b5',name:'Loan instalment',amount:6500,date:d(26),status:'planned'}]};
+  }
+  function load() {
+    corrupted = false; storageBlocked = false;
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) {
+        const data = JSON.parse(raw);
+        if (!data || Object.keys(data).sort().join(',') !== 'demo,plan' || typeof data.demo !== 'boolean') throw Error('Unrecognised saved data');
+        const v = F.validatePlan(data.plan); if (!v.ok) throw Error(v.errors.join('; '));
+        plan = data.plan; demo = data.demo; return;
+      }
+    } catch (e) {
+      if (e.name === 'SecurityError') storageBlocked = true;
+      else corrupted = true;
+    }
+    demo = true; plan = samplePlan();
+  }
+  function storageNotice() {
+    const node = $('storage-warning');
+    node.hidden = !(storageBlocked || corrupted);
+    node.textContent = corrupted ? 'Your saved plan could not be read. It has not been overwritten. You are viewing sample data; restore a valid backup or explicitly start a new plan to replace it.' : 'Browser storage is unavailable. Changes work for this session only. Download a backup before closing.';
+  }
+  function save() {
+    if (corrupted) return;
+    try { localStorage.setItem(KEY, JSON.stringify({demo,plan})); storageBlocked = false; }
+    catch { storageBlocked = true; }
+    storageNotice();
+  }
+  function commit(next) {
+    const v = F.validatePlan(next); if (!v.ok) throw Error(v.errors.join('; '));
+    plan = next; save(); render();
+  }
+  function toast(message) { clearTimeout(toastTimer); $('toast').textContent = message; $('toast').hidden = false; toastTimer = setTimeout(() => { $('toast').hidden = true; }, 4500); }
+  function money(n, compact = false) {
+    return new Intl.NumberFormat(plan.currency === 'INR' ? 'en-IN' : navigator.language, {style:'currency',currency:plan.currency,maximumFractionDigits:compact?1:2,minimumFractionDigits:0,...(compact ? {notation:'compact'} : {})}).format(n);
+  }
+  function dateLabel(date, full = false) {
+    const [y,m,d] = date.split('-').map(Number);
+    return new Date(y,m-1,d,12).toLocaleDateString(navigator.language,{day:'numeric',month:'short',...(full?{year:'numeric'}:{})});
+  }
+  const allEntries = () => [...plan.incomes.map(x => ({...x,type:'income'})),...plan.bills.map(x => ({...x,type:'bill'}))].sort((a,b) => a.date.localeCompare(b.date) || a.name.localeCompare(b.name));
+  const forecast = (mode, opts = {}) => F.forecast(plan,{today:F.today(),days,mode,...opts});
+  const stat = (label,value,foot) => `<div><span class="stat-label">${label}</span><strong class="stat-value ${value<0?'negative':''}">${esc(money(value))}</strong><span class="stat-foot">${foot}</span></div>`;
+  function chart(target, first, second, isScenario = false) {
+    const W=650,H=240,L=57,R=20,T=18,B=31;
+    const a=[plan.balance,...first.rows.map(r=>r.balance)],b=[plan.balance,...second.rows.map(r=>r.balance)];
+    const values=[...a,...b,0,plan.buffer]; let min=Math.min(...values),max=Math.max(...values); const pad=Math.max((max-min)*.14,100); min-=pad;max+=pad;
+    const x=i=>L+i/(a.length-1)*(W-L-R),y=v=>T+(max-v)/(max-min)*(H-T-B);
+    const points=arr=>arr.map((v,i)=>`${x(i).toFixed(2)},${y(v).toFixed(2)}`).join(' ');
+    let grid=''; for(let i=0;i<=3;i++){const v=min+(max-min)*i/3,yy=y(v);grid+=`<line x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="#e5e7dd"/><text x="${L-9}" y="${yy+4}" text-anchor="end">${esc(money(v,true))}</text>`;}
+    const ticks=[0,Math.round((a.length-1)/2),a.length-1];
+    const labels=ticks.map(i=>`<text x="${x(i)}" y="${H-6}" text-anchor="${i===0?'start':i===a.length-1?'end':'middle'}">${i===0?'Now':esc(dateLabel(first.rows[i-1].date))}</text>`).join('');
+    const bufferY=y(plan.buffer), zeroY=y(0);
+    const nodes=first.rows.map((r,i)=>r.income>0?`<circle cx="${x(i+1)}" cy="${y(r.balance)}" r="3.5" fill="#183f35" stroke="#fdfcf7" stroke-width="1.5"><title>${esc(dateLabel(r.date)+': income '+money(r.income))}</title></circle>`:'').join('');
+    $(target).innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${isScenario?'Expected plan compared with your scenario':'Expected payments compared with cash already available'}. Lowest balances: ${esc(money(first.lowestBalance))} and ${esc(money(second.lowestBalance))}. Exact daily values follow below."><title>Cash-flow forecast</title>${grid}<line x1="${L}" y1="${zeroY}" x2="${W-R}" y2="${zeroY}" stroke="#c6b8a4"/><line x1="${L}" y1="${bufferY}" x2="${W-R}" y2="${bufferY}" stroke="#87956d" stroke-dasharray="2 5"/><polygon points="${L},${H-B} ${points(a)} ${W-R},${H-B}" fill="#c0d6b5" opacity=".19"/><polyline points="${points(b)}" fill="none" stroke="${isScenario?'#b55230':'#a8763f'}" stroke-width="2" stroke-dasharray="5 5" stroke-linejoin="round"/><polyline points="${points(a)}" fill="none" stroke="#183f35" stroke-width="2.5" stroke-linejoin="round"/>${nodes}${labels}</svg>`;
+  }
+  function dailyTable(first, second, scenarioMode = false) {
+    return `<table><thead><tr><th scope="col">Date</th>${scenarioMode?'': '<th scope="col">Income</th><th scope="col">Bills</th><th scope="col">Essentials</th>'}<th scope="col">Expected</th><th scope="col">${scenarioMode?'Scenario':'Cash only'}</th></tr></thead><tbody>${first.rows.map((r,i)=>`<tr><th scope="row">${esc(dateLabel(r.date))}</th>${scenarioMode?'':`<td>${esc(money(r.income))}</td><td>${esc(money(r.bills))}</td><td>${esc(money(r.essentials))}</td>`}<td>${esc(money(r.balance))}</td><td>${esc(money(second.rows[i].balance))}</td></tr>`).join('')}</tbody></table>`;
+  }
+  function entryRow(e, editable = false) {
+    const income=e.type==='income',settled=e.status!=='planned',overdue=e.date<F.today()&&!settled;
+    const state=settled?(income?'Received':'Paid'):overdue?(income?'Reschedule needed':'Overdue'):income?(e.confidence==='confirmed'?'Confirmed':'Expected'):'Planned bill';
+    const action=`<div class="entry-actions">${settled?`<button class="text-button" data-action="undo" data-id="${esc(e.id)}" aria-label="Undo recording ${esc(e.name)}">Undo recording</button>`:`<button class="text-button" data-action="settle" data-id="${esc(e.id)}" aria-label="Record ${esc(e.name)} as ${income?'received':'paid'}">Record ${income?'received':'paid'}</button><button class="text-button" data-action="edit" data-id="${esc(e.id)}" aria-label="Edit ${esc(e.name)}">Edit</button>`}<button class="text-button danger" data-action="delete" data-id="${esc(e.id)}" aria-label="Delete ${esc(e.name)}">Delete</button></div>`;
+    return `<div class="entry-row ${editable?'ledger-row':''}"><span class="entry-icon ${income?'':'out'}" aria-hidden="true">${income?'↙':'↗'}</span><div><div class="entry-name">${esc(e.name)}</div><div class="entry-meta">${editable?esc(dateLabel(e.date))+' · ':''}${income?'Income':'Expense'} <span class="tag ${overdue?'overdue':settled?'recorded':''}">${state}</span></div></div><span class="entry-amount">${income?'+':'−'}${esc(money(e.amount))}</span>${editable?action:`<span class="entry-date">${esc(dateLabel(e.date))}</span>`}</div>`;
+  }
+  function renderOverview(base,cash) {
+    $('summary-stats').innerHTML=stat('Available now',plan.balance,'Your last entered balance')+stat('Lowest expected balance',base.lowestBalance,esc(dateLabel(base.lowestDate)))+stat('Your chosen buffer',plan.buffer,'Target to keep aside');
+    chart('chart',base,cash);$('forecast-table').innerHTML=dailyTable(base,cash);
+    $('overview-insight').innerHTML=cash.firstBelowBuffer?`<strong>Without incoming payments</strong>Your balance falls below your ${esc(money(plan.buffer))} buffer on ${esc(dateLabel(cash.firstBelowBuffer))}. Check which payments you’re relying on.`:`<strong>A little breathing room</strong>Your entered cash covers this window without falling below your buffer, based on the expenses entered.`;
+    const upcoming=allEntries().filter(e=>e.status==='planned'&&e.date<=F.addDays(F.today(),days-1)).slice(0,5);
+    $('upcoming-list').innerHTML=upcoming.length?upcoming.map(e=>entryRow(e)).join(''):`<div class="empty"><h3>Your next step: add what’s coming.</h3><p>Give income and bills a date to see your outlook.</p><button class="button secondary" data-nav="ledger">Add your first entry</button></div>`;
+  }
+  function renderLedger(){
+    const entries=allEntries().filter(e=>filter==='all'||(filter==='settled'?e.status!=='planned':e.type===filter));
+    $('ledger-list').innerHTML=entries.length?entries.map(e=>entryRow(e,true)).join(''):'<div class="empty"><h3>No entries here yet.</h3><p>Add income or a bill using the button above.</p></div>';
+    document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.toggle('active',b.dataset.filter===filter);b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
+  }
+  function renderScenario(base=forecast('expected')) {
+    const result=forecast('scenario',scenario),warning=result.firstBelowBuffer!==null;
+    $('delay-value').textContent=scenario.delayDays===0?'On time':`${scenario.delayDays} days`;
+    $('percent-value').textContent=`${scenario.incomePercent}%`;
+    const title=warning?`Your buffer gets tight on ${dateLabel(result.firstBelowBuffer)}.`:'Your buffer holds in this scenario.';
+    const text=result.firstNegative?`The projected balance drops below zero on ${dateLabel(result.firstNegative)}. The lowest balance is ${money(result.lowestBalance)}.`:warning?`The lowest projected balance is ${money(result.lowestBalance)}, which is ${money(Math.max(0,plan.buffer-result.lowestBalance))} below your chosen buffer.`:`The lowest projected balance stays ${money(result.headroom)} above your buffer, using the information entered.`;
+    $('scenario-summary').innerHTML=`<p class="result-kicker">${scenario.delayDays} DAYS LATER · ${scenario.incomePercent}% OF EXPECTED INCOME</p><h2 class="result-title ${warning?'alert':''}">${esc(title)}</h2><p class="result-copy">${esc(text)}</p><div class="comparison-values"><div><span>Lowest · expected plan</span><strong>${esc(money(base.lowestBalance))}</strong></div><div><span>Lowest · your scenario</span><strong class="${result.lowestBalance<0?'danger':''}">${esc(money(result.lowestBalance))}</strong></div></div>`;
+    chart('scenario-chart',base,result,true);$('scenario-table').innerHTML=dailyTable(base,result,true);
+    const hasExpected=plan.incomes.some(i=>i.status==='planned'&&i.confidence==='expected'&&i.date>=F.today()&&i.date<=F.addDays(F.today(),days-1));
+    $('scenario-next').innerHTML=!hasExpected?'<strong>No adjustable income in this window.</strong>Add an upcoming income entry labelled “Expected” to test a delay or a smaller payment. You can still preview a purchase.':warning?'<strong>A useful next step</strong>Check the expected payment date with the payer and review optional expenses before committing. Any bill-date change requires agreement with the provider. This tool cannot guarantee a payment or resolve an income shortfall.':'<strong>Keep the assumptions current</strong>This estimate only knows what you entered. Review your balance and missing expenses before making a spending decision.';
+  }
+  function renderSettings(){ $('setting-balance').value=plan.balance;$('setting-currency').value=plan.currency;$('setting-daily').value=plan.dailyEssentials;$('setting-buffer').value=plan.buffer; }
+  function render() {
+    const base=forecast('expected'),cash=forecast('cashOnly');
+    $('demo-banner').hidden=!demo; storageNotice();
+    $('today-label').textContent=new Date().toLocaleDateString(navigator.language,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    $('asof-label').textContent=`Balance as of ${dateLabel(plan.balanceUpdatedAt)}`;
+    const notices=[];if(plan.balanceUpdatedAt!==F.today()) notices.push('Your balance is not current. Refresh it before relying on these estimates.');
+    if(base.overdueIncomeCount) notices.push(`${base.overdueIncomeCount} overdue income ${base.overdueIncomeCount===1?'entry is':'entries are'} excluded. Reschedule or record receipt; we won’t assume it arrived.`);
+    if(plan.bills.some(b=>b.status==='planned'&&b.date<F.today())) notices.push('Unpaid overdue bills are included today.');
+    $('stale-banner').hidden=!notices.length;$('stale-banner').textContent=notices.join(' ');
+    document.querySelectorAll('.currency-label').forEach(n=>n.textContent=`(${plan.currency})`);
+    $('setup-guide').hidden=demo||plan.incomes.length>0||plan.bills.length>0;
+    renderOverview(base,cash);renderLedger();renderScenario(base);renderSettings();
+  }
+  const pageCopy={overview:['YOUR MONEY, LOOKING FORWARD','Make room for<br><em>the unexpected.</em>','See your bills and expected income together. Then give your plan a little room to breathe.'],ledger:['THE DETAILS BEHIND THE OUTLOOK','A place for every<br><em>payment.</em>','Add what’s coming in and what needs to go out. Keep the dates honest.'],scenario:['PLAN FOR A DIFFERENT OUTCOME','A little less guessing.<br><em>A little more clarity.</em>','Explore a delayed payment, a smaller amount or a new purchase before changing your plan.'],settings:['A PLAN THAT FITS YOUR LIFE','Start with<br><em>what you know.</em>','Set a starting balance and a buffer that makes sense for you. Adjust as life changes.' ]};
+  function navigate(name, focus=false) {
+    if(!Object.hasOwn(pageCopy,name))name='overview';active=name;
+    document.querySelectorAll('.view').forEach(v=>v.hidden=v.id!==`view-${name}`);
+    document.querySelectorAll('.nav-item').forEach(b=>{const selected=b.dataset.nav===name;b.classList.toggle('active',selected);if(selected)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+    $('page-eyebrow').textContent=pageCopy[name][0];$('page-title').innerHTML=pageCopy[name][1];$('page-description').textContent=pageCopy[name][2];
+    if(name==='settings')renderSettings();
+    if(location.hash!==`#${name}`)history.replaceState(null,'',`#${name}`);
+    if(focus){$('main').focus({preventScroll:true});window.scrollTo({top:0,behavior:'instant'});}
+  }
+  function showEditor(id='') {
+    const e=allEntries().find(e=>e.id===id);if(e&&e.status!=='planned')return;
+    $('entry-id').value=e?.id||'';$('entry-editor-title').textContent=e?'Edit entry':'New entry';
+    $('entry-type').value=e?.type||'income';$('entry-type').disabled=!!e;
+    $('entry-name').value=e?.name||'';$('entry-amount').value=e?.amount||'';$('entry-date').value=e?.date||F.today();$('entry-confidence').value=e?.confidence||'expected';
+    $('entry-repeat').value='once';$('entry-count').value=3;$('repeat-field').hidden=!!e;updateRepeatPreview();
+    $('confidence-field').hidden=$('entry-type').value!=='income';$('entry-error').textContent='';$('entry-editor').hidden=false;$('entry-name').focus();
+  }
+  function processAction(action,id) {
+    const e=allEntries().find(e=>e.id===id);if(!e)return;
+    if(action==='edit'){showEditor(id);return;}
+    const next=structuredClone(plan),arr=e.type==='income'?next.incomes:next.bills,item=arr.find(x=>x.id===id),sign=e.type==='income'?1:-1;
+    if(action==='settle'){
+      if(item.status!=='planned')return;
+      if(!confirm(`Record “${e.name}” as ${e.type==='income'?'received':'paid'}?\n\nThis ${sign>0?'adds':'subtracts'} ${money(e.amount)} ${sign>0?'to':'from'} your saved balance. Continue only if it happened and is NOT already included in that balance.`))return;
+      item.status=e.type==='income'?'received':'paid';next.balance=round(next.balance+sign*e.amount);
+    }else if(action==='undo'){
+      if(item.status==='planned')return;
+      if(!confirm(`Undo the recording of “${e.name}”?\n\nThis reverses its balance adjustment and returns it to planned. If you refreshed your balance since recording, check the balance afterwards.`))return;
+      item.status='planned';next.balance=round(next.balance-sign*e.amount);
+    }else if(action==='delete'){
+      if(!confirm(`Delete “${e.name}”?${item.status!=='planned'?' Its recorded payment stays reflected in your balance.':''}`))return;
+      arr.splice(arr.indexOf(item),1);
+    }else return;
+    try{commit(next);toast(action==='delete'?'Entry removed.':action==='undo'?'Recording reversed. Check your balance.':'Payment recorded. Balance updated.');}catch(err){toast(err.message);}
+  }
+  function resetScenario(){scenario={delayDays:0,incomePercent:100,purchaseAmount:0,purchaseDate:F.today()};$('delay').value=0;$('percent').value=100;$('purchase').value=0;$('purchase-date').value=F.today();$('scenario-error').textContent='';renderScenario();}
+  function replacePlan(next,isDemo){corrupted=false;demo=isDemo;filter='all';resetScenario();commit(next);$('entry-editor').hidden=true;}
+  document.addEventListener('click',e=>{
+    const nav=e.target.closest('[data-nav]');if(nav){navigate(nav.dataset.nav,true);return;}
+    const fil=e.target.closest('[data-filter]');if(fil){filter=fil.dataset.filter;renderLedger();return;}
+    const action=e.target.closest('[data-action]');if(action)processAction(action.dataset.action,action.dataset.id);
+  });
+  $('horizon').addEventListener('change',()=>{days=Number($('horizon').value);scenario.purchaseDate=F.today();$('purchase-date').value=F.today();render();});
+  $('add-entry').addEventListener('click',()=>showEditor());$('close-editor').addEventListener('click',()=>{$('entry-editor').hidden=true;$('add-entry').focus();});
+  $('entry-type').addEventListener('change',()=>{$('confidence-field').hidden=$('entry-type').value!=='income';});
+  function updateRepeatPreview(){
+    const repeating=$('entry-repeat').value!=='once'&&!$('entry-id').value;
+    $('count-field').hidden=!repeating;$('entry-count').required=repeating;$('entry-count').disabled=!repeating;
+    const preview=$('repeat-preview');preview.hidden=!repeating;if(!repeating)return;
+    try{const dates=CashsteadSchedule.dates($('entry-date').value,$('entry-repeat').value,Number($('entry-count').value));preview.textContent=`${dates.length} separate entries: ${dates.map(d=>dateLabel(d,true)).join(' · ')}.`;}catch{preview.textContent='Choose a valid first date and 2–12 occurrences.';}
+  }
+  ['entry-repeat','entry-count','entry-date'].forEach(id=>$(id).addEventListener('input',updateRepeatPreview));
+  $('entry-repeat').addEventListener('change',updateRepeatPreview);
+  $('entry-form').addEventListener('submit',e=>{
+    e.preventDefault();
+    try{
+      const next=structuredClone(plan),id=$('entry-id').value,type=$('entry-type').value,arr=type==='income'?next.incomes:next.bills;
+      const entry={id:id||uid(),name:$('entry-name').value.trim(),amount:Number($('entry-amount').value),date:$('entry-date').value,status:'planned',...(type==='income'?{confidence:$('entry-confidence').value}:{})};
+      const frequency=id?'once':$('entry-repeat').value,count=frequency==='once'?1:Number($('entry-count').value);
+      const dates=CashsteadSchedule.dates(entry.date,frequency,count);
+      if(id){const i=arr.findIndex(x=>x.id===id);if(i<0||arr[i].status!=='planned')throw Error('This entry changed. Close the editor and reopen it.');arr[i]=entry;}
+      else dates.forEach((date,i)=>arr.push({...entry,id:i?uid():entry.id,date}));
+      const valid=F.validatePlan(next);if(!valid.ok)throw Error(valid.errors.join('; '));
+      if(count>1&&!confirm(`Create ${count} separate entries of ${money(entry.amount)} each, from ${dateLabel(dates[0],true)} to ${dateLabel(dates.at(-1),true)}?\n\nCheck for existing entries first. This adds all occurrences now; it does not repeat forever.`))return;
+      commit(next);$('entry-editor').hidden=true;$('add-entry').focus();toast(id?'Entry updated.':count>1?`${count} dated entries added.`:'Entry added to your plan.');
+    }catch(err){$('entry-error').textContent=err.message;}
+  });
+  const readScenario=()=>({delayDays:Number($('delay').value),incomePercent:Number($('percent').value),purchaseAmount:Number($('purchase').value),purchaseDate:$('purchase-date').value});
+  function applyScenario(){
+    const next=readScenario();const end=F.addDays(F.today(),days-1);
+    if(next.purchaseAmount>0&&(next.purchaseDate<F.today()||next.purchaseDate>end))throw Error(`Choose a purchase date between ${dateLabel(F.today())} and ${dateLabel(end)}.`);
+    if(Math.abs(next.purchaseAmount*100-Math.round(next.purchaseAmount*100))>1e-6)throw Error('Use at most 2 decimal places for the purchase amount.');
+    forecast('scenario',next);scenario=next;renderScenario();$('scenario-error').textContent='';
+  }
+  $('scenario-form').addEventListener('submit',e=>{e.preventDefault();try{applyScenario();toast('Comparison updated. Your saved plan is unchanged.');}catch(err){$('scenario-error').textContent=err.message;}});
+  ['delay','percent'].forEach(id=>$(id).addEventListener('input',()=>{try{applyScenario();}catch(err){$('scenario-error').textContent=err.message;}}));
+  $('reset-scenario').addEventListener('click',resetScenario);
+  $('settings-form').addEventListener('submit',e=>{
+    e.preventDefault();const next={...structuredClone(plan),balance:Number($('setting-balance').value),currency:$('setting-currency').value,dailyEssentials:Number($('setting-daily').value),buffer:Number($('setting-buffer').value),balanceUpdatedAt:F.today()};
+    if(next.currency!==plan.currency&&!confirm('Change currency labels? Existing amounts will NOT be converted. You must update their values yourself.'))return;
+    try{commit(next);$('settings-error').textContent='';toast('Starting balance and assumptions saved.');}catch(err){$('settings-error').textContent=err.message;}
+  });
+  $('start-own').addEventListener('click',()=>{if(!confirm('Replace the sample with an empty plan? Your real amounts will stay in this browser.'))return;replacePlan(emptyPlan(),false);navigate('settings',true);$('setting-balance').focus();toast('Start with your current balance.');});
+  $('load-demo').addEventListener('click',()=>{if(!confirm('Replace this plan with sample data? Download a backup first if you want to keep your current plan.'))return;replacePlan(samplePlan(),true);navigate('overview',true);toast('Sample plan loaded.');});
+  $('clear-plan').addEventListener('click',()=>{
+    if(!confirm('Permanently delete this browser’s saved plan? Download a backup first if you need it.'))return;
+    try{localStorage.removeItem(KEY);}catch{storageBlocked=true;}corrupted=false;demo=false;plan=emptyPlan();resetScenario();save();render();navigate('settings',true);toast('Financial entries deleted. An empty plan is saved.');
+  });
+  $('export-plan').addEventListener('click',()=>{
+    const blob=new Blob([JSON.stringify(plan,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`cashstead-backup-${F.today()}.json`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Backup created. Keep the downloaded file private.');
+  });
+  $('import-plan').addEventListener('change',async e=>{
+    const input=e.currentTarget,file=input.files?.[0];if(!file)return;input.disabled=true;
+    try{
+      if(file.size>1000000)throw Error('Backup is too large. Maximum size: 1 MB.');
+      const data=JSON.parse(await file.text()),v=F.validatePlan(data);if(!v.ok)throw Error(`Invalid backup: ${v.errors.join('; ')}`);
+      if(!confirm('Replace your current plan with this backup? Your existing plan will be overwritten.'))return;
+      replacePlan(data,false);$('import-error').textContent='';toast('Backup restored. Review the balance date.');
+    }catch(err){$('import-error').textContent=err instanceof SyntaxError?'This file is not valid JSON. Your plan has not changed.':err.message;}finally{input.value='';input.disabled=false;}
+  });
+  addEventListener('hashchange',()=>navigate(location.hash.slice(1),true));
+  addEventListener('storage',e=>{if(e.key===KEY){load();render();toast('Plan refreshed from another tab.');}});
+  let renderedDay=F.today();
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&renderedDay!==F.today()){renderedDay=F.today();if(scenario.purchaseDate<renderedDay){scenario.purchaseDate=renderedDay;$('purchase-date').value=renderedDay;}render();toast('A new day: review your current balance.');}});
+  load();$('purchase-date').value=scenario.purchaseDate;render();navigate(location.hash.slice(1));
+})();
+</script>
+</body>
+</html>
